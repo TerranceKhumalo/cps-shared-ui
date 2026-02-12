@@ -1,8 +1,8 @@
-$color-calm: var(--cps-color-calm);
-$dark-text-color: var(--cps-color-text-dark);
-$darkest-text-color: var(--cps-color-text-darkest);
-$line-color: var(--cps-color-line-mid);
-$operator-bg-color: var(--cps-color-bg-light);
+$color-calm: var(--cps-accent-primary);
+$dark-text-color: var(--cps-text-primary);
+$darkest-text-color: var(--cps-text-primary);
+$line-color: var(--cps-border-color);
+$operator-bg-color: var(--cps-surface-muted);
 
 :host {
   .cps-table-col-filter {
@@ -28,7 +28,7 @@ $operator-bg-color: var(--cps-color-bg-light);
     }
 
     .cps-table-col-filter-menu-button-active {
-      color: var(--cps-color-calm-lighten1);
+      color: var(--cps-accent-primary);
     }
   }
 }
@@ -47,7 +47,7 @@ $operator-bg-color: var(--cps-color-bg-light);
     justify-content: space-between;
     align-items: center;
     &-title {
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: inherit;
       color: $darkest-text-color;
       max-width: 390px;
       cursor: default;
@@ -56,7 +56,7 @@ $operator-bg-color: var(--cps-color-bg-light);
       margin-left: 8px;
       cursor: pointer;
       &:hover {
-        color: var(--cps-color-calm);
+        color: var(--cps-accent-primary);
       }
     }
   }

@@ -1,14 +1,15 @@
 $group-label-color: var(--cps-text-secondary);
-$group-label-disabled-color: var(--cps-color-text-mild);
+$group-label-disabled-color: var(--cps-text-muted);
 $selected-background-color: var(--cps-accent-primary);
-$selected-disabled-background-color: var(--cps-color-line-mid);
-$selected-disabled-option-label-color: var(--cps-color-text-mild);
+$selected-disabled-background-color: var(--cps-background-disabled);
+$selected-disabled-option-label-color: var(--cps-text-muted);
 $disabled-background-color: var(--cps-background-disabled);
-$disabled-option-label-color: var(--cps-color-text-light);
-$option-label-color: var(--cps-color-text-dark);
+$disabled-option-label-color: var(--cps-text-muted);
+$option-label-color: var(--cps-text-secondary);
 $border-color: var(--cps-border-color);
 $option-hover-background: var(--cps-highlight-hover);
 $option-active-background: var(--cps-highlight-active);
+$toggle-border-radius: var(--cps-border-radius-medium);
 
 :host {
   .cps-btn-toggle {
@@ -19,7 +20,7 @@ $option-active-background: var(--cps-highlight-active);
       display: inline-flex;
       font-weight: 700;
       font-size: 16px;
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: inherit;
       cursor: default;
 
       .cps-btn-toggle-label-info-circle {
@@ -48,7 +49,7 @@ $option-active-background: var(--cps-highlight-active);
       &-option-input:checked + .cps-btn-toggle-content-option-content {
         background-color: $selected-background-color;
         z-index: 1;
-        color: #ffffff;
+        color: var(--cps-text-on-accent);
         &:hover {
           background-image: linear-gradient(hsla(0, 0%, 100%, 0.1) 0 0);
         }
@@ -80,9 +81,9 @@ $option-active-background: var(--cps-highlight-active);
           border-right: 0;
           font-weight: normal;
           font-size: 16px;
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: inherit;
           letter-spacing: 0.05em;
-          color: var(--cps-text-muted);
+          color: $option-label-color;
           text-align: center;
           transition: background-color 0.2s ease;
           -webkit-user-select: none; /* Safari */
@@ -94,7 +95,7 @@ $option-active-background: var(--cps-highlight-active);
           }
           &:active {
             background: $option-active-background;
-            color: #ffffff;
+            color: var(--cps-text-secondary);
           }
         }
       }
@@ -103,12 +104,12 @@ $option-active-background: var(--cps-highlight-active);
 
   .cps-btn-toggle-content-option:first-child
     .cps-btn-toggle-content-option-content {
-    border-radius: 4px 0 0 4px;
+    border-radius: $toggle-border-radius 0 0 $toggle-border-radius;
   }
 
   .cps-btn-toggle-content-option:last-child
     .cps-btn-toggle-content-option-content {
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 $toggle-border-radius $toggle-border-radius 0;
     border-right: 0.0625em solid $border-color;
   }
 }

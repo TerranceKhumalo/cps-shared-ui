@@ -376,7 +376,7 @@ $tbar-normal-height: 72px;
     .p-paginator .p-paginator-last {
       background-color: transparent;
       border: 1px solid $paginator-border-color;
-      border-radius: 4px;
+      border-radius: var(--cps-border-radius-small);
       color: $paginator-text-color;
       min-width: 32px;
       height: 32px;
@@ -418,7 +418,7 @@ $tbar-normal-height: 72px;
     .p-paginator .p-paginator-pages .p-paginator-page {
       background-color: transparent;
       border: 1px solid $paginator-border-color;
-      border-radius: 4px;
+      border-radius: var(--cps-border-radius-small);
       color: $paginator-text-color;
       min-width: 32px;
       height: 32px;
@@ -465,7 +465,7 @@ $tbar-normal-height: 72px;
       border-top: 1px solid $treetable-borders-color;
       border-right: 1px solid $treetable-borders-color;
       border-left: 4px solid $color-surprise !important;
-      border-radius: 4px 4px 0 0;
+      border-radius: var(--cps-border-radius-small) var(--cps-border-radius-small) 0 0;
       font-size: 16px;
       line-height: 150%;
       background-color: var(--cps-surface-body);

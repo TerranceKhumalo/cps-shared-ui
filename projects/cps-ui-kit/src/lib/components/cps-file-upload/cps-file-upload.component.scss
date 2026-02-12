@@ -8,13 +8,13 @@ $text-color-darkest: var(--cps-text-secondary);
   display: flex;
   .cps-file-upload {
     .cps-file-upload-dropzone {
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: inherit;
       min-height: 20px;
       padding: 2rem;
       text-align: center;
       border: $border-dashed-2px;
       position: relative;
-      border-radius: 1rem;
+      border-radius: var(--cps-border-radius-large);
       &:hover {
         background-color: var(--cps-highlight-hover);
       }
@@ -67,8 +67,8 @@ $text-color-darkest: var(--cps-text-secondary);
       border-bottom: $border-dashed-2px;
       border-left: $border-dashed-2px;
       border-right: $border-dashed-2px;
-      border-bottom-right-radius: 16px;
-      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: var(--cps-border-radius-large);
+      border-bottom-left-radius: var(--cps-border-radius-large);
       background-color: var(--cps-highlight-hover);
 
       .cps-file-upload-uploaded-file {
@@ -98,7 +98,7 @@ $text-color-darkest: var(--cps-text-secondary);
           margin-left: 8px;
           &:hover {
             ::ng-deep .cps-icon {
-              color: var(--cps-color-error-darken1) !important;
+              color: var(--cps-color-error) !important;
             }
           }
         }

@@ -5,12 +5,12 @@
   }
   .sort-desc {
     border: 4px solid transparent;
-    border-bottom-color: var(--cps-color-calm);
+    border-bottom-color: var(--cps-accent-primary);
     margin-bottom: 4px;
   }
   .sort-asc {
     border: 4px solid transparent;
-    border-top-color: var(--cps-color-calm);
+    border-top-color: var(--cps-accent-primary);
     margin-top: 4px;
   }
   .sort-unsorted {
@@ -19,14 +19,14 @@
     .sort-unsorted-arrow-up {
       display: inline-flex;
       border: 4px solid transparent;
-      border-bottom-color: var(--cps-color-line-dark);
+      border-bottom-color: var(--cps-text-muted);
       margin-bottom: 4px;
       margin-top: -4px;
     }
     .sort-unsorted-arrow-down {
       display: inline-flex;
       border: 4px solid transparent;
-      border-top-color: var(--cps-color-line-dark);
+      border-top-color: var(--cps-text-muted);
     }
   }
 }

@@ -1,14 +1,14 @@
 $transition-duration: 0.2s;
-$header-text-color: var(--cps-color-text-dark);
-$disabled-header-text-color: var(--cps-color-text-mild);
-$header-hover-background: var(--cps-color-highlight-hover);
-$header-active-background: var(--cps-color-highlight-active);
+$header-text-color: var(--cps-text-primary);
+$disabled-header-text-color: var(--cps-text-muted);
+$header-hover-background: var(--cps-highlight-hover);
+$header-active-background: var(--cps-highlight-active);
 
 :host {
   display: flex;
   .cps-expansion-panel {
     overflow: hidden;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: inherit;
     line-height: 20px;
     color: $header-text-color;
 

@@ -6,14 +6,14 @@ $autocomplete-label-color: var(--cps-text-primary);
 $autocomplete-label-disabled-color: var(--cps-text-disabled);
 $autocomplete-items-disabled-color: var(--cps-text-disabled);
 $autocomplete-hint-color: var(--cps-text-muted);
-$option-hover-background: var(--cps-color-highlight-hover);
-$selected-option-background: var(--cps-color-highlight-selected);
-$option-highlight-background: var(--cps-color-highlight-active);
-$option-highlight-selected-background: var(--cps-color-highlight-selected-dark);
+$option-hover-background: var(--cps-highlight-hover);
+$selected-option-background: var(--cps-highlight-selected);
+$option-highlight-background: var(--cps-highlight-active);
+$option-highlight-selected-background: var(--cps-highlight-selected-dark);
 $autocomplete-option-info-color: var(--cps-text-secondary);
 $autocomplete-option-value-color: var(--cps-text-primary);
 $autocomplete-about-remove-color: var(--cps-text-muted);
-$autocomplete-about-remove-background: var(--cps-color-bg-mid);
+$autocomplete-about-remove-background: var(--cps-surface-muted);
 $autocomplete-prefix-icon-color: var(--cps-text-secondary);
 $autocomplete-border-color: var(--cps-border-color);
 
@@ -210,7 +210,7 @@ $hover-transition-duration: 0.2s;
       }
 
       &:hover {
-        border: 1px solid $color-calm;
+        border: 1px solid var(--cps-border-strong);
         .cps-autocomplete-box-area {
           .prefix-icon {
             color: $color-calm;
@@ -398,7 +398,7 @@ $hover-transition-duration: 0.2s;
   }
 
   .select-all-option {
-    border-bottom: 1px solid lightgrey;
+    border-bottom: 1px solid var(--cps-border-color);
     font-weight: 600;
   }
 

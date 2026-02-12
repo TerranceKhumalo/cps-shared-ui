@@ -6,10 +6,10 @@ $select-label-color: var(--cps-text-primary);
 $select-label-disabled-color: var(--cps-text-disabled);
 $select-items-disabled-color: var(--cps-text-disabled);
 $select-hint-color: var(--cps-text-muted);
-$option-hover-background: var(--cps-color-highlight-hover);
-$selected-option-background: var(--cps-color-highlight-selected);
-$option-highlight-background: var(--cps-color-highlight-active);
-$option-highlight-selected-background: var(--cps-color-highlight-selected-dark);
+$option-hover-background: var(--cps-highlight-hover);
+$selected-option-background: var(--cps-highlight-selected);
+$option-highlight-background: var(--cps-highlight-active);
+$option-highlight-selected-background: var(--cps-highlight-selected-dark);
 $select-option-info-color: var(--cps-text-secondary);
 $select-option-value-color: var(--cps-text-primary);
 $select-prefix-icon-color: var(--cps-text-secondary);
@@ -149,7 +149,7 @@ $hover-transition-duration: 0.2s;
       }
 
       &:hover {
-        border: 1px solid $color-calm;
+        border: 1px solid var(--cps-border-strong);
         .cps-select-box-left {
           .prefix-icon {
             color: $color-calm;

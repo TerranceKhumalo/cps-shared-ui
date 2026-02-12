@@ -1,8 +1,8 @@
 $color-error: var(--cps-color-error);
-$timepicker-hint-color: var(--cps-color-text-mild);
-$timepicker-label-color: var(--cps-color-text-dark);
-$timepicker-label-disabled-color: var(--cps-color-text-mild);
-$timepicker-delimeter-color: var(--cps-color-text-lightest);
+$timepicker-hint-color: var(--cps-text-muted);
+$timepicker-label-color: var(--cps-text-primary);
+$timepicker-label-disabled-color: var(--cps-text-muted);
+$timepicker-delimeter-color: var(--cps-text-muted);
 
 :host {
   .cps-timepicker {

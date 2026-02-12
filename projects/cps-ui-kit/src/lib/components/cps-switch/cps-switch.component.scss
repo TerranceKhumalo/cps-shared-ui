@@ -73,7 +73,7 @@
 
     input:checked + .cps-switch-slider:before {
       transform: translateX(24px);
-      background-color: white;
+      background-color: var(--cps-text-on-accent);
     }
 
     input:disabled ~ .cps-switch-slider {
