@@ -273,10 +273,10 @@
   --cps-color-text-darkest: #2d2323;
 
   // Semantic design tokens (use these inside components)
-  --cps-accent-primary: var(--cps-color-calm);
+  --cps-accent-primary: var(--cps-color-passion);
   --cps-accent-primary-contrast: #ffffff;
-  --cps-accent-secondary: var(--cps-color-depth);
-  --cps-accent-secondary-contrast: var(--cps-color-human-lighten5);
+  --cps-accent-secondary: var(--cps-color-energy);
+  --cps-accent-secondary-contrast: #2d2323;
   --cps-color-error: #cc3333;
   --cps-error-background: #fef3f2;
 
@@ -302,7 +302,7 @@
 
   --cps-text-primary: var(--cps-color-text-darkest);
   --cps-text-secondary: var(--cps-color-text-dark);
-  --cps-text-muted: #6b7280;
+  --cps-text-muted: var(--cps-color-text-mild);
   --cps-text-inverse: var(--cps-color-depth-darken4);
   --cps-text-on-accent: #ffffff;
   --cps-text-disabled: var(--cps-color-text-light);
@@ -327,4 +327,42 @@
   --cps-state-error: var(--cps-color-error);
   --cps-state-error-contrast: #ffffff;
   --cps-state-error-surface: var(--cps-color-error-bg);
+
+  // Modern semantic surfaces
+  --cps-card-background: var(--cps-surface-highlight);
+  --cps-card-foreground: var(--cps-text-primary);
+  --cps-popover-background: var(--cps-surface-control);
+  --cps-popover-foreground: var(--cps-text-primary);
+  --cps-input-background: var(--cps-surface-control);
+  --cps-input-foreground: var(--cps-text-primary);
+  --cps-input-placeholder: var(--cps-text-muted);
+
+  // Focus ring and outlines
+  --cps-ring-color: var(--cps-border-focus);
+  --cps-ring-offset-color: var(--cps-surface-body);
+
+  // Radius scale
+  --cps-radius-sm: 4px;
+  --cps-radius-md: 8px;
+  --cps-radius-lg: 12px;
+  --cps-radius-xl: 16px;
+  --cps-radius-full: 9999px;
+
+  // Backward compatible radius aliases
+  --cps-border-radius-small: var(--cps-radius-sm);
+  --cps-border-radius-medium: var(--cps-radius-md);
+  --cps-border-radius-large: var(--cps-radius-lg);
+  --cps-border-radius-round: var(--cps-radius-full);
+
+  // Elevation shadows
+  --cps-shadow-xs: 0 1px 2px rgba(45, 35, 35, 0.08);
+  --cps-shadow-sm: 0 2px 6px rgba(45, 35, 35, 0.12);
+  --cps-shadow-md: 0 8px 20px rgba(45, 35, 35, 0.14);
+  --cps-shadow-lg: 0 16px 40px rgba(45, 35, 35, 0.2);
+
+  // Motion tokens
+  --cps-motion-fast: 120ms;
+  --cps-motion-base: 180ms;
+  --cps-motion-slow: 260ms;
+  --cps-motion-easing: cubic-bezier(0.2, 0, 0, 1);
 }

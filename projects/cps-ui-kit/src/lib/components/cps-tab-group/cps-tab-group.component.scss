@@ -28,7 +28,7 @@
 
     .nav-btn-back {
       left: 0;
-      box-shadow: 2px 0 2px -1px #0003;
+      box-shadow: var(--cps-shadow-xs);
       cps-icon {
         transform: rotate(90deg);
       }
@@ -36,7 +36,7 @@
 
     .nav-btn-forward {
       right: 0;
-      box-shadow: -2px 0 2px -1px #0003;
+      box-shadow: var(--cps-shadow-xs);
       cps-icon {
         transform: rotate(270deg);
       }
@@ -62,7 +62,7 @@
         justify-content: center;
         min-width: 150px;
         padding: 0 24px;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: inherit;
         font-style: normal;
         font-weight: 500;
         font-size: 15px;
@@ -71,7 +71,10 @@
         opacity: 1;
         cursor: pointer;
         border-bottom: 3px solid transparent;
-        transition: border-bottom 0.2s;
+        transition:
+          border-color var(--cps-motion-base) var(--cps-motion-easing),
+          color var(--cps-motion-base) var(--cps-motion-easing),
+          background-color var(--cps-motion-base) var(--cps-motion-easing);
 
         &.active:not(.disabled) {
           color: var(--cps-accent-primary);
@@ -121,7 +124,7 @@
   }
 
   .cps-tabs:not(.cps-tabs-subtabs) {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid var(--cps-border-color);
     .cps-tabs-list .cps-tab {
       &.active:not(.disabled) {
         border-bottom: 3px solid var(--cps-accent-primary);
@@ -143,9 +146,12 @@
   }
 
   .cps-tabs.cps-tabs-subtabs {
+    padding: 4px;
+    border-radius: var(--cps-border-radius-medium);
     .cps-tabs-list .cps-tab {
       height: 33px;
       background-color: var(--cps-tab-subtabs-background);
+      border-radius: var(--cps-border-radius-small);
 
       &.active {
         background-color: var(--cps-tabs-subtabs-active-background);
@@ -161,7 +167,7 @@
     display: flex;
     position: relative;
     min-height: 100px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: inherit;
     color: var(--cps-text-primary); //--cps-text-primary
     flex: 1;
     border-bottom: none;

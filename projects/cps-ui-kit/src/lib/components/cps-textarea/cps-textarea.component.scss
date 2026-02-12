@@ -1,15 +1,15 @@
-$color-calm: var(--cps-color-calm);
-$textarea-hint-color: var(--cps-color-text-mild);
-$textarea-label-disabled-color: var(--cps-color-text-mild);
-$textarea-pass-show-btn-color: var(--cps-color-text-mild);
-$textarea-placeholder-color: var(--cps-color-text-lightest);
-$textarea-border-color: var(--cps-color-line-light);
-$textarea-label-color: var(--cps-color-text-dark);
-$textarea-text-color: var(--cps-color-text-dark);
-$textarea-text-disabled-color: var(--cps-color-text-light);
+$color-calm: var(--cps-accent-primary);
+$textarea-hint-color: var(--cps-text-muted);
+$textarea-label-disabled-color: var(--cps-text-disabled);
+$textarea-pass-show-btn-color: var(--cps-text-muted);
+$textarea-placeholder-color: var(--cps-input-placeholder);
+$textarea-border-color: var(--cps-border-color);
+$textarea-label-color: var(--cps-text-primary);
+$textarea-text-color: var(--cps-input-foreground);
+$textarea-text-disabled-color: var(--cps-text-disabled);
 
 $color-error: var(--cps-color-error);
-$error-background: #fef3f2;
+$error-background: var(--cps-error-background);
 
 $hover-transition-duration: 0.2s;
 
@@ -20,11 +20,11 @@ $hover-transition-duration: 0.2s;
     gap: 0.2rem !important;
     display: flex !important;
     flex-direction: column !important;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: inherit;
 
     .cps-textarea-wrap {
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       &:hover {
         textarea:enabled {
           border: 1px solid $color-calm;
@@ -42,26 +42,29 @@ $hover-transition-duration: 0.2s;
 
       textarea {
         display: block;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: inherit;
         font-size: 1rem;
         color: $textarea-text-color;
-        background: #ffffff;
+        background: var(--cps-input-background);
         padding: 0.375rem 0.75rem;
         line-height: 1.5;
         min-height: 38px;
         border: 1px solid $textarea-border-color;
-        transition-property: border-color;
-        transition-duration: $hover-transition-duration;
+        transition:
+          border-color $hover-transition-duration var(--cps-motion-easing),
+          box-shadow $hover-transition-duration var(--cps-motion-easing),
+          background-color $hover-transition-duration var(--cps-motion-easing);
         appearance: none;
-        border-radius: 4px;
+        border-radius: var(--cps-border-radius-medium);
         width: 100%;
         &:focus {
-          border: 1px solid $color-calm;
+          border-color: $color-calm;
+          box-shadow: 0 0 0 3px var(--cps-highlight-selected);
           outline: 0;
         }
         &:disabled {
           color: $textarea-text-disabled-color;
-          background-color: #f7f7f7;
+          background-color: var(--cps-background-disabled);
           opacity: 1;
           pointer-events: none;
         }
@@ -143,7 +146,7 @@ $hover-transition-duration: 0.2s;
     }
 
     ::placeholder {
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: inherit;
       color: $textarea-placeholder-color;
       font-style: italic;
       opacity: 1; /* Firefox */

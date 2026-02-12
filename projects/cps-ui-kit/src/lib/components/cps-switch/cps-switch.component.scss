@@ -1,9 +1,9 @@
 :host {
-  $color-calm: var(--cps-color-calm);
-  $label-color: var(--cps-color-text-dark);
-  $disabled-label-color: var(--cps-color-text-light);
-  $disabled-slider-color: var(--cps-color-text-lightest);
-  $transition-time: 0.2s;
+  $color-calm: var(--cps-accent-primary);
+  $label-color: var(--cps-text-primary);
+  $disabled-label-color: var(--cps-text-disabled);
+  $disabled-slider-color: var(--cps-border-color);
+  $transition-time: var(--cps-motion-base);
 
   min-width: max-content;
   display: inline-block;
@@ -33,15 +33,15 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: white;
+      background-color: var(--cps-input-background);
       transition: $transition-time;
       border: 1px solid $color-calm;
-      border-radius: 30px;
+      border-radius: var(--cps-radius-full);
     }
 
     .cps-switch-label {
       font-size: 16px;
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: inherit;
       font-style: normal;
       color: $label-color;
       margin-left: 10px;
@@ -56,7 +56,7 @@
       content: '';
       height: 14px;
       width: 14px;
-      border-radius: 20px;
+      border-radius: var(--cps-radius-full);
       left: 4px;
       bottom: 4px;
       background-color: $color-calm;
@@ -68,7 +68,7 @@
     }
 
     input:focus + .cps-switch-slider {
-      box-shadow: 0 0 1px $color-calm;
+      box-shadow: 0 0 0 3px var(--cps-highlight-selected);
     }
 
     input:checked + .cps-switch-slider:before {

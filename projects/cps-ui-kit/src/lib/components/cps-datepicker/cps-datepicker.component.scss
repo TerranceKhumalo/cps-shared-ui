@@ -1,10 +1,10 @@
-$color-calm: var(--cps-color-calm);
-$color-prepared: var(--cps-color-prepared);
-$color-highlight: var(--cps-color-highlight-hover);
-$color-selected-background: var(--cps-color-highlight-selected);
-$other-month-color: var(--cps-color-text-light);
-$text-color: var(--cps-color-text-darkest);
-$disabled-day-color: var(--cps-color-text-lightest);
+$color-calm: var(--cps-accent-primary);
+$color-prepared: var(--cps-accent-secondary);
+$color-highlight: var(--cps-highlight-hover);
+$color-selected-background: var(--cps-highlight-selected);
+$other-month-color: var(--cps-text-muted);
+$text-color: var(--cps-text-primary);
+$disabled-day-color: var(--cps-text-disabled);
 
 :host {
   display: flex;
@@ -35,22 +35,27 @@ $disabled-day-color: var(--cps-color-text-lightest);
   user-select: none; /* Standard syntax */
 
   ::ng-deep {
+    .p-datepicker,
+    .p-datepicker-panel,
     .p-datepicker .p-datepicker-panel {
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: inherit;
       width: auto !important;
       padding: 0.5rem;
-      background: #ffffff;
+      background: var(--cps-popover-background);
       color: $text-color;
-      border: 1px solid #ced4da;
+      border: 1px solid var(--cps-border-color);
+      border-radius: var(--cps-border-radius-medium);
+      box-shadow: var(--cps-shadow-md);
     }
 
+    .p-datepicker-header,
     .p-datepicker .p-datepicker-header {
       padding: 0.5rem;
       color: $text-color;
-      background: #ffffff;
+      background: var(--cps-popover-background);
       font-weight: 600;
       margin: 0;
-      border-bottom: 1px solid #dee2e6;
+      border-bottom: 1px solid var(--cps-border-color);
       border-top-right-radius: 6px;
       border-top-left-radius: 6px;
     }
@@ -75,9 +80,9 @@ $disabled-day-color: var(--cps-color-text-lightest);
     }
     .p-datepicker .p-datepicker-header .p-datepicker-prev-button:focus,
     .p-datepicker .p-datepicker-header .p-datepicker-next-button:focus {
-      outline: 0 none;
+      outline: 0;
       outline-offset: 0;
-      box-shadow: unset;
+      box-shadow: 0 0 0 2px var(--cps-highlight-selected);
     }
     .p-datepicker .p-datepicker-header .p-datepicker-title {
       line-height: 2rem;
@@ -152,7 +157,7 @@ $disabled-day-color: var(--cps-color-text-lightest);
     }
     .p-datepicker .p-datepicker-buttonbar {
       padding: 0.5rem 0 0;
-      border-top: 1px solid #dee2e6;
+      border-top: 1px solid var(--cps-border-color);
     }
     .p-datepicker .p-datepicker-buttonbar .p-button {
       width: auto;
@@ -161,7 +166,7 @@ $disabled-day-color: var(--cps-color-text-lightest);
       border-style: solid;
     }
     .p-datepicker .p-timepicker {
-      border-top: 1px solid #dee2e6;
+      border-top: 1px solid var(--cps-border-color);
       padding: 0.5rem;
     }
     .p-datepicker .p-timepicker button {
@@ -182,9 +187,9 @@ $disabled-day-color: var(--cps-color-text-lightest);
       background: $color-highlight;
     }
     .p-datepicker .p-timepicker button:focus {
-      outline: 0 none;
+      outline: 0;
       outline-offset: 0;
-      box-shadow: unset;
+      box-shadow: 0 0 0 2px var(--cps-highlight-selected);
     }
     .p-datepicker .p-timepicker button:last-child {
       margin-top: 0.2em;
@@ -225,7 +230,7 @@ $disabled-day-color: var(--cps-color-text-lightest);
       font-weight: bold;
     }
     .p-datepicker.p-datepicker-multiple-month .p-datepicker-group {
-      border-left: 1px solid #dee2e6;
+      border-left: 1px solid var(--cps-border-color);
       padding-right: 0.5rem;
       padding-left: 0.5rem;
       padding-top: 0;
@@ -300,9 +305,9 @@ $disabled-day-color: var(--cps-color-text-lightest);
     }
 
     .p-ripple:focus {
-      outline: 0 none;
+      outline: 0;
       outline-offset: 0;
-      box-shadow: unset;
+      box-shadow: 0 0 0 2px var(--cps-highlight-selected);
     }
 
     .p-ripple {
@@ -315,13 +320,13 @@ $disabled-day-color: var(--cps-color-text-lightest);
       -webkit-user-select: none;
       user-select: none;
       font-size: 1rem;
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: inherit;
       border-radius: 6px;
     }
 
     .p-datepicker-buttonbar {
       .p-button {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: inherit;
         background-color: transparent;
         color: $color-calm;
         border-color: transparent;
@@ -344,7 +349,7 @@ $disabled-day-color: var(--cps-color-text-lightest);
           box-shadow 0.2s;
         border-radius: 6px;
         &:focus {
-          box-shadow: unset;
+          box-shadow: 0 0 0 2px var(--cps-highlight-selected);
         }
         &:hover {
           background-color: $color-highlight;

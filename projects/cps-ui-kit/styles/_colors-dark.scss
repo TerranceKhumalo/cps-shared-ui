@@ -247,53 +247,53 @@
   --cps-color-error-darken4: #300c0c;
 
   // States backgrounds
-  --cps-color-info-bg: #f7fcfe;
-  --cps-color-success-bg: #f8fbf7;
-  --cps-color-warn-bg: #fffcf7;
-  --cps-color-error-bg: #fef8f8;
+  --cps-color-info-bg: rgba(73, 185, 255, 0.16);
+  --cps-color-success-bg: rgba(93, 211, 58, 0.16);
+  --cps-color-warn-bg: rgba(255, 186, 48, 0.16);
+  --cps-color-error-bg: rgba(255, 90, 103, 0.16);
 
   // Highlights
-  --cps-color-highlight-hover: #f8f4f5;
-  --cps-color-highlight-active: #f1eaec;
-  --cps-color-highlight-selected: #efe4e7;
-  --cps-color-highlight-selected-dark: #e6d4d9;
+  --cps-color-highlight-hover: rgba(251, 251, 251, 0.06);
+  --cps-color-highlight-active: rgba(251, 251, 251, 0.1);
+  --cps-color-highlight-selected: rgba(245, 110, 15, 0.16);
+  --cps-color-highlight-selected-dark: rgba(245, 110, 15, 0.24);
 
   //Backgrounds
-  --cps-color-bg-lightest: #fbfbfb;
-  --cps-color-bg-light: #f9f8f8;
-  --cps-color-bg-mid: #f4f3f3;
-  --cps-color-bg-dark: #eeeded;
+  --cps-color-bg-lightest: #2a2a31;
+  --cps-color-bg-light: #1f1f24;
+  --cps-color-bg-mid: #1b1b1e;
+  --cps-color-bg-dark: #151419;
 
   //Lines
-  --cps-color-line-light: #e3e2e2;
-  --cps-color-line-mid: #d7d5d5;
-  --cps-color-line-dark: #cac7c7;
-  --cps-color-line-darkest: #bebaba;
+  --cps-color-line-light: #3f3f46;
+  --cps-color-line-mid: #50505a;
+  --cps-color-line-dark: #666670;
+  --cps-color-line-darkest: #7a7a86;
 
   //Text
-  --cps-color-text-lightest: #b5b2b2;
-  --cps-color-text-light: #9a9595;
-  --cps-color-text-mild: #787272;
-  --cps-color-text-dark: #524a4a;
-  --cps-color-text-darkest: #2d2323;
+  --cps-color-text-lightest: #fbfbfb;
+  --cps-color-text-light: #d0d0d2;
+  --cps-color-text-mild: #a8a8ad;
+  --cps-color-text-dark: #878787;
+  --cps-color-text-darkest: #151419;
 
   // Semantic design tokens (use these inside components)
-  --cps-accent-primary: var(--cps-color-surprise);
-  --cps-accent-primary-contrast: var(--cps-color-text-darkest);
-  --cps-accent-secondary: var(--cps-color-warn); //--cps-color-human-lighten5
-  --cps-accent-secondary-contrast: var(--cps-color-energy-lighten3);
-  --cps-color-error: #ff2b5b;
-  --cps-error-background: #ffb3b327;
+  --cps-accent-primary: #f56e0f;
+  --cps-accent-primary-contrast: #151419;
+  --cps-accent-secondary: #fbfbfb;
+  --cps-accent-secondary-contrast: #151419;
+  --cps-color-error: #ff5a67;
+  --cps-error-background: rgba(255, 90, 103, 0.16);
 
   // Lines and borders
-  --cps-color-line: #e3e2e22d;
-  --cps-surface-body: #1a1a1a;
-  --cps-surface-highlight: #262626;
-  --cps-surface-muted: var(--cps-color-bg-mid);
-  --cps-surface-elevated: #1f1f1f;
-  --cps-surface-control: var(--cps-color-bg-lightest);
-  --cps-surface-overlay: rgba(0, 0, 0, 0.65);
-  --cps-background-color: #0f0f0f;
+  --cps-color-line: rgba(251, 251, 251, 0.12);
+  --cps-surface-body: #151419;
+  --cps-surface-highlight: #1b1b1e;
+  --cps-surface-muted: #202028;
+  --cps-surface-elevated: #262626;
+  --cps-surface-control: #262626;
+  --cps-surface-overlay: rgba(21, 20, 25, 0.85);
+  --cps-background-color: #151419;
   --cps-background-disabled: rgba(
     255,
     255,
@@ -303,40 +303,74 @@
 
   // Tab component
   --cps-tab-subtabs-background: var(--cps-surface-highlight);
-  --cps-tabs-subtabs-active-background: color-mix(
-    in oklab,
-    var(--cps-accent-primary) 5%,
-    transparent
-  );
+  --cps-tabs-subtabs-active-background: rgba(245, 110, 15, 0.16);
   --cps-tabs-subtabs-background-hover: var(--cps-highlight-hover);
   --cps-tabs-subtabs-text-hover: var(--cps-text-primary);
 
   // Text
-  --cps-text-primary: #f3f4f6;
-  --cps-text-secondary: #caccda; // #dcdee9 second candidate
-  --cps-text-muted: #9ca3af;
+  --cps-text-primary: #fbfbfb;
+  --cps-text-secondary: #d0d0d2;
+  --cps-text-muted: #878787;
   --cps-text-inverse: var(--cps-color-depth-darken4);
-  --cps-text-on-accent: var(--cps-color-text-darkest);
-  --cps-text-disabled: #8a8c92;
+  --cps-text-on-accent: #151419;
+  --cps-text-disabled: #6f6f74;
 
-  --cps-border-color: #333333;
-  --cps-border-strong: var(--cps-color-line-darkest);
-  --cps-border-focus: var(--cps-color-surprise);
+  --cps-border-color: #3a3a3a;
+  --cps-border-strong: #505050;
+  --cps-border-focus: var(--cps-accent-primary);
 
-  --cps-highlight-hover: rgba(255, 255, 255, 0.05);
-  --cps-highlight-active: var(--cps-color-text-darkest);
-  --cps-highlight-selected: var(--cps-color-highlight-selected);
+  --cps-highlight-hover: rgba(251, 251, 251, 0.1);
+  --cps-highlight-active: rgba(251, 251, 251, 0.16);
+  --cps-highlight-selected: rgba(245, 110, 15, 0.22);
 
-  --cps-state-info: var(--cps-color-info);
-  --cps-state-info-contrast: var(--cps-color-text-darkest);
-  --cps-state-info-surface: var(--cps-color-info-bg);
-  --cps-state-success: var(--cps-color-success);
-  --cps-state-success-contrast: var(--cps-color-text-darkest);
-  --cps-state-success-surface: var(--cps-color-success-bg);
-  --cps-state-warn: var(--cps-color-warn);
-  --cps-state-warn-contrast: var(--cps-color-text-darkest);
-  --cps-state-warn-surface: var(--cps-color-warn-bg);
+  --cps-state-info: #49b9ff;
+  --cps-state-info-contrast: #151419;
+  --cps-state-info-surface: rgba(73, 185, 255, 0.16);
+  --cps-state-success: #5dd33a;
+  --cps-state-success-contrast: #151419;
+  --cps-state-success-surface: rgba(93, 211, 58, 0.16);
+  --cps-state-warn: #ffba30;
+  --cps-state-warn-contrast: #151419;
+  --cps-state-warn-surface: rgba(255, 186, 48, 0.16);
   --cps-state-error: var(--cps-color-error);
-  --cps-state-error-contrast: var(--cps-color-text-darkest);
-  --cps-state-error-surface: var(--cps-color-error-bg);
+  --cps-state-error-contrast: #ffffff;
+  --cps-state-error-surface: rgba(255, 90, 103, 0.16);
+
+  // Modern semantic surfaces
+  --cps-card-background: var(--cps-surface-highlight);
+  --cps-card-foreground: var(--cps-text-primary);
+  --cps-popover-background: var(--cps-surface-elevated);
+  --cps-popover-foreground: var(--cps-text-primary);
+  --cps-input-background: var(--cps-surface-highlight);
+  --cps-input-foreground: var(--cps-text-primary);
+  --cps-input-placeholder: var(--cps-text-muted);
+
+  // Focus ring and outlines
+  --cps-ring-color: var(--cps-border-focus);
+  --cps-ring-offset-color: var(--cps-surface-body);
+
+  // Radius scale
+  --cps-radius-sm: 4px;
+  --cps-radius-md: 8px;
+  --cps-radius-lg: 12px;
+  --cps-radius-xl: 16px;
+  --cps-radius-full: 9999px;
+
+  // Backward compatible radius aliases
+  --cps-border-radius-small: var(--cps-radius-sm);
+  --cps-border-radius-medium: var(--cps-radius-md);
+  --cps-border-radius-large: var(--cps-radius-lg);
+  --cps-border-radius-round: var(--cps-radius-full);
+
+  // Elevation shadows
+  --cps-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --cps-shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.34);
+  --cps-shadow-md: 0 12px 24px rgba(0, 0, 0, 0.4);
+  --cps-shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.5);
+
+  // Motion tokens
+  --cps-motion-fast: 120ms;
+  --cps-motion-base: 180ms;
+  --cps-motion-slow: 260ms;
+  --cps-motion-easing: cubic-bezier(0.2, 0, 0, 1);
 }

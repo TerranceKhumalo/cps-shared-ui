@@ -4,7 +4,7 @@
   .cps-button {
     width: 100%;
     letter-spacing: normal;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: inherit;
 
     display: inline-flex;
     align-items: center;
@@ -16,14 +16,25 @@
     outline: none;
     padding: 0 16px;
     font-weight: 500;
+    border-radius: var(--cps-border-radius-medium);
+    transition:
+      background-color var(--cps-motion-base) var(--cps-motion-easing),
+      border-color var(--cps-motion-base) var(--cps-motion-easing),
+      color var(--cps-motion-base) var(--cps-motion-easing),
+      box-shadow var(--cps-motion-base) var(--cps-motion-easing),
+      transform var(--cps-motion-fast) var(--cps-motion-easing);
+
+    &:focus-visible {
+      outline: 2px solid var(--cps-ring-color);
+      outline-offset: 2px;
+    }
 
     &:hover:not(:active):not(:disabled) {
-      background-image: linear-gradient(hsla(0, 0%, 100%, 0.1) 0 0);
-      box-shadow: 0 2px 4px 0 rgba(12, 12, 13, 0.2);
+      box-shadow: var(--cps-shadow-sm);
     }
 
     &:active:not(:disabled) {
-      background-image: linear-gradient(hsla(0, 0%, 0%, 0.1) 0 0);
+      transform: translateY(1px);
     }
 
     &__content {
@@ -35,10 +46,12 @@
 
     &:disabled {
       cursor: default;
+      box-shadow: none;
     }
 
     &--solid {
       border: 0;
+      box-shadow: var(--cps-shadow-xs);
 
       &:disabled {
         background-color: var(--cps-color-line-mid) !important;
@@ -47,8 +60,13 @@
     }
 
     &--outlined {
-      border: 2px solid;
+      border: 2px solid currentColor;
       box-sizing: border-box;
+      background-color: transparent;
+
+      &:hover:not(:active):not(:disabled) {
+        background-color: var(--cps-highlight-hover);
+      }
 
       &:disabled {
         border-color: var(--cps-color-line-dark) !important;
@@ -57,11 +75,14 @@
     }
 
     &--borderless {
+      background-color: transparent;
+
       &:disabled {
         color: var(--cps-text-disabled) !important;
       }
       &:hover:not(:active):not(:disabled) {
-        box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1);
+        background-color: var(--cps-highlight-hover);
+        box-shadow: none;
       }
     }
 

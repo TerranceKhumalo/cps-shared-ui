@@ -34,3 +34,50 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--cps-accent-primary);
 }
+
+html,
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  background: var(--cps-background-color);
+  color: var(--cps-text-primary);
+}
+
+// Theme transition hook used by CpsThemeService
+.cps-theme-transition,
+.cps-theme-transition *,
+.cps-theme-transition *::before,
+.cps-theme-transition *::after {
+  transition:
+    background-color var(--cps-motion-base) var(--cps-motion-easing),
+    border-color var(--cps-motion-base) var(--cps-motion-easing),
+    color var(--cps-motion-base) var(--cps-motion-easing),
+    box-shadow var(--cps-motion-base) var(--cps-motion-easing) !important;
+}
+
+// Global modern primitives for controls (Shadcn-inspired, token-driven)
+:where(button, input, textarea, select, [role='button']) {
+  border-radius: var(--cps-radius-md);
+}
+
+:where(input, textarea, select) {
+  background: var(--cps-input-background);
+  color: var(--cps-input-foreground);
+  border: 1px solid var(--cps-border-color);
+}
+
+:where(input, textarea, select)::placeholder {
+  color: var(--cps-input-placeholder);
+}
+
+:where(button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--cps-ring-color);
+  outline-offset: 2px;
+}
+
+:where(.p-component-overlay, .p-dropdown-panel, .p-datepicker, .p-menu, .p-overlaypanel) {
+  background: var(--cps-popover-background);
+  color: var(--cps-popover-foreground);
+  border: 1px solid var(--cps-border-color);
+  border-radius: var(--cps-radius-md);
+  box-shadow: var(--cps-shadow-md);
+}
