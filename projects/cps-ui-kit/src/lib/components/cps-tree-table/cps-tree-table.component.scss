@@ -3,9 +3,9 @@ $color-prepared: var(--cps-accent-secondary);
 $color-surprise: var(--cps-border-focus);
 $toolbar-text-color: var(--cps-text-primary);
 $treetable-borders-color: var(--cps-border-color);
-$stripe-color: var(--cps-surface-elevated);
+$stripe-color: var(--cps-surface-muted);
 $row-hover-background: var(--cps-highlight-hover);
-$row-selected-background: var(--cps-highlight-selected);
+$row-selected-background: var(--cps-highlight-active);
 $header-text-color: var(--cps-text-light);
 $body-text-color: var(--cps-text-secondary);
 $colitem-hover-background: var(--cps-highlight-hover);
@@ -110,7 +110,10 @@ $tbar-normal-height: 72px;
     .p-treetable .p-treetable-tbody > tr {
       background: var(--cps-surface-body);
       color: $body-text-color;
-      transition: box-shadow 0.2s;
+      transition:
+        background-color var(--cps-motion-base) var(--cps-motion-easing),
+        color var(--cps-motion-base) var(--cps-motion-easing),
+        box-shadow var(--cps-motion-base) var(--cps-motion-easing);
       &.cps-treetable-row-selected {
         background-color: $row-selected-background !important;
       }
@@ -226,8 +229,7 @@ $tbar-normal-height: 72px;
       -webkit-user-select: none;
       user-select: none;
       font-size: 14px;
-      font-family: 'Source Sans Pro', sans-serif;
-      border-radius: 6px;
+      font-family: inherit;
     }
 
     input[type='button'],
@@ -598,8 +600,8 @@ $tbar-normal-height: 72px;
     }
 
     .p-treetable .p-treetable-tbody > tr.p-highlight {
-      background: var(--cps-highlight-selected);
-      color: var(--cps-text-primary);
+      background: $row-selected-background;
+      color: $body-text-color;
     }
 
     .p-treetable.p-treetable-hoverable-rows
@@ -717,12 +719,26 @@ $tbar-normal-height: 72px;
       padding: 1.25rem 1.25rem;
     }
 
-    .p-treetable.p-treetable-striped .p-treetable-tbody > tr:nth-child(odd):not(.p-highlight) {
+    .p-treetable.p-treetable-striped .p-treetable-tbody > tr:nth-child(odd):not(.p-highlight),
+    .p-treetable.p-treetable-striped .p-treetable-tbody > tr:nth-child(odd):not(.p-highlight) > td {
       background: $stripe-color !important;
     }
 
-    .p-treetable.p-treetable-striped .p-treetable-tbody > tr:nth-child(even):not(.p-highlight) {
+    .p-treetable.p-treetable-striped .p-treetable-tbody > tr:nth-child(even):not(.p-highlight),
+    .p-treetable.p-treetable-striped .p-treetable-tbody > tr:nth-child(even):not(.p-highlight) > td {
       background: var(--cps-surface-body) !important;
+    }
+
+    .p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover,
+    .p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover > td {
+      background: $row-hover-background !important;
+    }
+
+    .p-treetable .p-treetable-tbody > tr.p-highlight,
+    .p-treetable .p-treetable-tbody > tr.p-highlight > td,
+    .p-treetable .p-treetable-tbody > tr.cps-treetable-row-selected,
+    .p-treetable .p-treetable-tbody > tr.cps-treetable-row-selected > td {
+      background: $row-selected-background !important;
     }
 
     .cps-treetable-row-menu-cell {

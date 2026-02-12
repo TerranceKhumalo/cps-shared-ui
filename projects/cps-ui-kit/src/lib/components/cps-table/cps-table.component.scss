@@ -256,7 +256,10 @@ $tbar-normal-height: 72px;
     .p-datatable .p-datatable-tbody > tr {
       background: var(--cps-surface-body);
       color: var(--cps-text-secondary);
-      transition: box-shadow 0.2s;
+      transition:
+        background-color var(--cps-motion-base) var(--cps-motion-easing),
+        color var(--cps-motion-base) var(--cps-motion-easing),
+        box-shadow var(--cps-motion-base) var(--cps-motion-easing);
       &.cps-table-row-selected {
         background-color: var(--cps-highlight-active) !important;
       }
@@ -520,7 +523,7 @@ $tbar-normal-height: 72px;
     .p-paginator .p-paginator-next,
     .p-paginator .p-paginator-last {
       background-color: transparent;
-      border: 1px solid var(--cps-text-secondary);
+      border: 1px solid var(--cps-border-strong);
       border-radius: 4px;
       color: var(--cps-text-secondary);
       min-width: 32px;
@@ -561,7 +564,7 @@ $tbar-normal-height: 72px;
 
     .p-paginator .p-paginator-pages .p-paginator-page {
       background-color: transparent;
-      border: 1px solid var(--cps-text-secondary);
+      border: 1px solid var(--cps-border-strong);
       border-radius: 4px;
       color: var(--cps-text-secondary);
       min-width: 32px;

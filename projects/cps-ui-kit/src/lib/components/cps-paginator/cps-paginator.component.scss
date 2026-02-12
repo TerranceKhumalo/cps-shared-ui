@@ -1,8 +1,8 @@
-$color-calm: var(--cps-color-calm);
-$text-color: var(--cps-color-text-dark);
-$border-color: var(--cps-color-text-dark);
-$elem-hover-background: var(--cps-color-highlight-hover);
-$elem-active-background: var(--cps-color-highlight-active);
+$color-calm: var(--cps-accent-primary);
+$text-color: var(--cps-text-secondary);
+$border-color: var(--cps-border-strong);
+$elem-hover-background: var(--cps-highlight-hover);
+$elem-active-background: var(--cps-highlight-active);
 
 :host {
   ::ng-deep {
@@ -12,7 +12,9 @@ $elem-active-background: var(--cps-color-highlight-active);
       justify-content: center;
       flex-wrap: wrap;
       color: $text-color;
-      padding: 0.5rem 1rem;
+      padding: 1rem;
+      background: var(--cps-surface-body);
+      border: 1px solid var(--cps-border-color);
     }
 
     .p-paginator-content-start {
@@ -21,7 +23,7 @@ $elem-active-background: var(--cps-color-highlight-active);
         display: inline-flex;
         align-items: center;
         .cps-paginator-items-per-page-title {
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: inherit;
           font-size: 14px;
           margin-right: 12px;
           cursor: default;
@@ -50,7 +52,7 @@ $elem-active-background: var(--cps-color-highlight-active);
       min-width: 3rem;
       margin: 0.143rem;
       padding: 0 0.5rem;
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: inherit;
       font-size: 14px;
       height: unset;
     }
@@ -114,10 +116,13 @@ $elem-active-background: var(--cps-color-highlight-active);
       pointer-events: none;
     }
 
-    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected {
-      background: $color-calm;
-      border-color: $color-calm;
-      color: white;
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected,
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected:hover,
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected:active,
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected:focus {
+      background: var(--cps-accent-primary) !important;
+      border-color: var(--cps-accent-primary) !important;
+      color: var(--cps-text-on-accent) !important;
     }
 
     .p-paginator .p-paginator-pages .p-paginator-page:not(.p-paginator-page-selected):hover {
@@ -145,9 +150,9 @@ $elem-active-background: var(--cps-color-highlight-active);
     }
 
     .p-paginator-page:focus {
-      outline: 0 none;
+      outline: 0;
       outline-offset: 0;
-      box-shadow: unset;
+      box-shadow: 0 0 0 2px var(--cps-highlight-selected);
     }
 
     .p-paginator-page {
@@ -160,7 +165,7 @@ $elem-active-background: var(--cps-color-highlight-active);
       -webkit-user-select: none;
       user-select: none;
       font-size: 14px;
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: inherit;
     }
 
     .p-disabled,
