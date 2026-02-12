@@ -1,8 +1,8 @@
-$color: var(--cps-color-calm);
-$border-color: var(--cps-color-text-mild);
-$disabled-color: var(--cps-color-text-lightest);
-$label-color: var(--cps-color-text-dark);
-$disabled-label-color: var(--cps-color-text-light);
+$color: var(--cps-accent-primary);
+$border-color: var(--cps-text-muted);
+$disabled-color: var(--cps-border-strong);
+$label-color: var(--cps-text-primary);
+$disabled-label-color: var(--cps-text-secondary);
 
 :host {
   .cps-radio-group-content-button {
@@ -59,8 +59,9 @@ $disabled-label-color: var(--cps-color-text-light);
         box-shadow: inset 1rem 1rem $disabled-color;
       }
 
-      &:disabled + .cps-radio-group-content-button-label {
-        color: $disabled-label-color;
+      &:disabled ~ .cps-radio-group-content-button-label {
+        color: $disabled-label-color !important;
+        cursor: not-allowed;
       }
 
       &:checked::before {

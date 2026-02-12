@@ -5,11 +5,11 @@
   -ms-user-select: none;
   user-select: none;
   .cps-tag {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: inherit;
     min-height: 25px;
     align-items: center;
     padding: 0 10px;
-    background-color: white;
+    background-color: var(--cps-surface-body);
     display: inline-flex;
     cursor: default;
 
@@ -19,26 +19,26 @@
     &.cps-tag--selectable {
       cursor: pointer;
       &:not(:active):not(:disabled) {
-        box-shadow: 1px 3px 4px rgb(0 0 0 / 10%);
+        box-shadow: var(--cps-shadow-sm);
       }
     }
 
     &.cps-tag--disabled {
       pointer-events: none;
-      border-color: var(--cps-color-line-dark) !important;
+      border-color: var(--cps-border-strong) !important;
       p {
-        color: var(--cps-color-text-light);
+        color: var(--cps-text-muted);
       }
     }
 
     &.unselected {
-      border-color: var(--cps-color-text-light) !important;
+      border-color: var(--cps-border-color) !important;
     }
 
     p {
       margin: 0;
       font-size: 11px;
-      color: var(--cps-color-text-dark);
+      color: var(--cps-text-secondary);
     }
   }
 }

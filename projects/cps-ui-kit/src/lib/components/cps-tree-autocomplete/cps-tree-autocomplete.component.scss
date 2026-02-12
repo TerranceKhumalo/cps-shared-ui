@@ -1,22 +1,22 @@
-$color-calm: var(--cps-color-calm);
+$color-calm: var(--cps-accent-primary);
 $color-error: var(--cps-color-error);
-$error-background: #fef3f2;
-$treeautocomplete-placeholder-color: var(--cps-color-text-lightest);
-$treeautocomplete-label-color: var(--cps-color-text-dark);
-$treeautocomplete-label-disabled-color: var(--cps-color-text-mild);
-$treeautocomplete-items-disabled-color: var(--cps-color-text-light);
-$treeautocomplete-hint-color: var(--cps-color-text-mild);
-$option-hover-background: var(--cps-color-highlight-hover);
-$selected-option-background: var(--cps-color-highlight-selected);
-$option-highlight-background: var(--cps-color-highlight-active);
-$option-highlight-selected-background: var(--cps-color-highlight-selected-dark);
-$treeautocomplete-option-info-color: var(--cps-color-text-light);
-$treeautocomplete-option-value-color: var(--cps-color-text-dark);
-$treeautocomplete-about-remove-color: var(--cps-color-text-light);
-$treeautocomplete-about-remove-background: var(--cps-color-bg-mid);
-$treeautocomplete-prefix-icon-color: var(--cps-color-text-dark);
-$treeautocomplete-option-chevron-color: var(--cps-color-text-light);
-$treeautocomplete-border-color: var(--cps-color-line-light);
+$error-background: var(--cps-error-background);
+$treeautocomplete-placeholder-color: var(--cps-text-muted);
+$treeautocomplete-label-color: var(--cps-text-primary);
+$treeautocomplete-label-disabled-color: var(--cps-text-muted);
+$treeautocomplete-items-disabled-color: var(--cps-text-muted);
+$treeautocomplete-hint-color: var(--cps-text-muted);
+$option-hover-background: var(--cps-highlight-hover);
+$selected-option-background: var(--cps-highlight-selected);
+$option-highlight-background: var(--cps-highlight-active);
+$option-highlight-selected-background: var(--cps-highlight-selected-dark);
+$treeautocomplete-option-info-color: var(--cps-text-muted);
+$treeautocomplete-option-value-color: var(--cps-text-secondary);
+$treeautocomplete-about-remove-color: var(--cps-text-muted);
+$treeautocomplete-about-remove-background: var(--cps-surface-muted);
+$treeautocomplete-prefix-icon-color: var(--cps-text-secondary);
+$treeautocomplete-option-chevron-color: var(--cps-text-muted);
+$treeautocomplete-border-color: var(--cps-border-color);
 
 $hover-transition-duration: 0.2s;
 
@@ -27,7 +27,7 @@ $hover-transition-duration: 0.2s;
     position: relative;
     width: 100%;
     outline: none;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: inherit;
     font-weight: normal;
     display: grid;
 
@@ -41,7 +41,7 @@ $hover-transition-duration: 0.2s;
 
       &.focused {
         .cps-treeautocomplete-box {
-          background: white !important;
+          background: var(--cps-input-background) !important;
         }
       }
 
@@ -63,6 +63,7 @@ $hover-transition-duration: 0.2s;
     &.active {
       .cps-treeautocomplete-box {
         border: 1px solid $color-calm;
+        box-shadow: 0 0 0 3px var(--cps-highlight-selected);
         .cps-treeautocomplete-box-area {
           .prefix-icon {
             color: $color-calm;
@@ -107,13 +108,16 @@ $hover-transition-duration: 0.2s;
       min-height: 38px;
       width: 100%;
       cursor: text;
-      background: white;
+      background: var(--cps-input-background);
       font-size: 1rem;
       outline: none;
       padding: 0 12px 0 12px;
-      border-radius: 4px;
+      border-radius: var(--cps-border-radius-medium);
       border: 1px solid $treeautocomplete-border-color;
-      transition-duration: $hover-transition-duration;
+      transition:
+        border-color $hover-transition-duration var(--cps-motion-easing),
+        box-shadow $hover-transition-duration var(--cps-motion-easing),
+        background-color $hover-transition-duration var(--cps-motion-easing);
 
       &-area {
         display: flex;
@@ -136,7 +140,7 @@ $hover-transition-duration: 0.2s;
         color: $treeautocomplete-option-value-color;
         border-style: none;
         outline: none;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: inherit;
         &::placeholder {
           color: $treeautocomplete-placeholder-color;
           font-style: italic;
@@ -209,7 +213,7 @@ $hover-transition-duration: 0.2s;
       }
 
       &:hover {
-        border: 1px solid $color-calm;
+        border: 1px solid var(--cps-border-strong);
         .cps-treeautocomplete-box-area {
           .prefix-icon {
             color: $color-calm;
@@ -270,7 +274,7 @@ $hover-transition-duration: 0.2s;
     &.disabled {
       pointer-events: none;
       .cps-treeautocomplete-box {
-        background: #f7f7f7;
+        background: var(--cps-surface-muted);
         &-items {
           color: $treeautocomplete-items-disabled-color;
           .text-group,
@@ -300,14 +304,14 @@ $hover-transition-duration: 0.2s;
 }
 
 .cps-treeautocomplete-options {
-  background: white;
+  background: var(--cps-surface-body);
   overflow-x: hidden;
   max-height: 242px;
   overflow-y: auto;
 
   ::ng-deep {
     .p-tree {
-      background: #ffffff;
+      background: var(--cps-surface-body);
       color: $treeautocomplete-option-value-color;
       padding: 0;
       border: unset;
@@ -370,7 +374,7 @@ $hover-transition-duration: 0.2s;
     }
 
     .p-component {
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: inherit;
       font-size: 14px;
       font-weight: normal;
     }

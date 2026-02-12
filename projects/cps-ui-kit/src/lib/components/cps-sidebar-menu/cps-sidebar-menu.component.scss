@@ -2,12 +2,12 @@
   $sidebar-width: 80px;
   $sidebar-width-collapsed: 40px;
   $sidebar-item-height: 80px;
-  $sidebar-item-hover-background: var(--cps-color-highlight-hover);
-  $sidebar-item-active-background: var(--cps-color-highlight-active);
-  $sidebar-item-content-color: var(--cps-color-text-darkest);
-  $sidebar-item-content-disabled-color: var(--cps-color-text-light);
-  $sidebar-border-color: var(--cps-color-line-mid);
-  $color-calm: var(--cps-color-calm);
+  $sidebar-item-hover-background: var(--cps-highlight-hover);
+  $sidebar-item-active-background: var(--cps-highlight-active);
+  $sidebar-item-content-color: var(--cps-text-primary);
+  $sidebar-item-content-disabled-color: var(--cps-text-muted);
+  $sidebar-border-color: var(--cps-border-color);
+  $color-calm: var(--cps-accent-primary);
   $transition-duration: 0.2s;
 
   .cps-sidebar-menu {
@@ -15,7 +15,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: var(--cps-shadow-lg);
     width: $sidebar-width;
     transition-duration: $transition-duration;
     overflow: hidden;
@@ -71,9 +71,9 @@
 
       &.active {
         background: $color-calm;
-        color: white;
+        color: var(--cps-text-on-accent);
         .cps-sidebar-menu-item-label {
-          color: white;
+          color: var(--cps-text-on-accent);
         }
       }
 

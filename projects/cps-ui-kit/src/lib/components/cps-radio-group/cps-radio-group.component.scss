@@ -1,5 +1,5 @@
-$group-label-color: var(--cps-color-text-dark);
-$radio-hint-color: var(--cps-color-text-mild);
+$group-label-color: var(--cps-text-primary);
+$radio-hint-color: var(--cps-text-muted);
 $color-error: var(--cps-color-error);
 
 :host {
@@ -7,7 +7,7 @@ $color-error: var(--cps-color-error);
   display: inline-block;
 
   .cps-radio-group {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: inherit;
     &-label {
       font-style: normal;
       font-weight: 700;
