@@ -542,12 +542,13 @@ $tbar-normal-height: 72px;
       pointer-events: none;
     }
 
-    .p-paginator
-      .p-paginator-pages
-      .p-paginator-page.p-paginator-page-selected {
-      background: var(--cps-accent-primary);
-      border-color: var(--cps-accent-primary);
-      color: var(--cps-text-on-accent);
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected,
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected:hover,
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected:active,
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected:focus {
+      background: var(--cps-accent-primary) !important;
+      border-color: var(--cps-accent-primary) !important;
+      color: var(--cps-text-on-accent) !important;
     }
 
     .p-paginator
@@ -576,6 +577,14 @@ $tbar-normal-height: 72px;
     .p-paginator-element:focus {
       z-index: 1;
       position: relative;
+    }
+
+    span.p-paginator-icon,
+    span.p-paginator-first-icon,
+    span.p-paginator-prev-icon,
+    span.p-paginator-last-icon,
+    span.p-paginator-next-icon {
+      display: contents;
     }
 
     .p-paginator-page:focus {

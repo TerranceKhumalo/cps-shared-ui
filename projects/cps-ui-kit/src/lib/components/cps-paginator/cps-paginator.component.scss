@@ -149,6 +149,14 @@ $elem-active-background: var(--cps-highlight-active);
       position: relative;
     }
 
+    span.p-paginator-icon,
+    span.p-paginator-first-icon,
+    span.p-paginator-prev-icon,
+    span.p-paginator-last-icon,
+    span.p-paginator-next-icon {
+      display: contents;
+    }
+
     .p-paginator-page:focus {
       outline: 0;
       outline-offset: 0;

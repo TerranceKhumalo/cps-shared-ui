@@ -394,12 +394,13 @@ $tbar-normal-height: 72px;
       pointer-events: none;
     }
 
-    .p-paginator
-      .p-paginator-pages
-      .p-paginator-page.p-paginator-page-selected {
-      background: $color-calm;
-      border-color: $color-calm;
-      color: var(--cps-text-on-accent);
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected,
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected:hover,
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected:active,
+    .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected:focus {
+      background: var(--cps-accent-primary) !important;
+      border-color: var(--cps-accent-primary) !important;
+      color: var(--cps-text-on-accent) !important;
     }
 
     .p-paginator
