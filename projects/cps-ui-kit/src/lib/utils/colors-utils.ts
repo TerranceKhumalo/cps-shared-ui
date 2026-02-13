@@ -74,20 +74,6 @@ const LEGACY_COLOR_ALIASES: Record<string, string> = {
 
 const normalizeTokenName = (value: string): string => value.trim().toLowerCase();
 
-const COLOR_TOKEN_PREFIXES = [
-  '--cps-color',
-  '--cps-text',
-  '--cps-accent',
-  '--cps-surface',
-  '--cps-border',
-  '--cps-highlight',
-  '--cps-state',
-  '--cps-background',
-  '--cps-ring',
-  '--cps-popover',
-  '--cps-input'
-];
-
 const getColorTokenVar = (value: string): string => {
   const normalized = normalizeTokenName(value);
 
@@ -124,24 +110,39 @@ const isValidCSSColor = (val: string, _document: Document): boolean => {
 };
 
 const isDark = (color: string): boolean => {
+  if (!color) {
+    return false;
+  }
+
   let r = 0;
   let g = 0;
   let b = 0;
+
   if (color.match(/^rgb/)) {
     const colorMatched = color.match(
       /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/
-    ) as any;
-    r = colorMatched[1];
-    g = colorMatched[2];
-    b = colorMatched[3];
-  } else {
-    const colorNum = +(
-      '0x' + color.slice(1).replace(color.length < 5 && (/./g as any), '$&$&')
     );
+
+    if (!colorMatched) {
+      return false;
+    }
+
+    r = Number.parseInt(colorMatched[1], 10);
+    g = Number.parseInt(colorMatched[2], 10);
+    b = Number.parseInt(colorMatched[3], 10);
+  } else if (color.match(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/)) {
+    const normalizedHex =
+      color.length === 4
+        ? `#${color[1]}${color[1]}${color[2]}${color[2]}${color[3]}${color[3]}`
+        : color;
+
+    const colorNum = Number.parseInt(normalizedHex.slice(1), 16);
 
     r = colorNum >> 16;
     g = (colorNum >> 8) & 255;
     b = colorNum & 255;
+  } else {
+    return false;
   }
 
   const hsp = Math.sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
@@ -164,11 +165,7 @@ export const getCpsColors = (_document: Document): [string, string][] =>
                 propName.trim(),
                 rule.style.getPropertyValue(propName).trim()
               ])
-              .filter(([propName]) =>
-                COLOR_TOKEN_PREFIXES.some((prefix) =>
-                  propName.startsWith(prefix)
-                )
-              );
+              .filter(([propName]) => propName.indexOf('--cps-color') === 0);
 
             return [...propValArr, ...props];
           }, [])

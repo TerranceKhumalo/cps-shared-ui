@@ -6,7 +6,9 @@ import { computed, effect, inject, Injectable, signal } from '@angular/core';
  * @group Types
  */
 export type CpsTheme = 'light' | 'dark';
-export type CpsColorTheme = 'neutral' | 'amber' | 'green' | 'luxury' | 'cps';
+export type CpsColorTheme = 'neutral' | 'calm' | 'energy' | 'passion';
+export type CpsBaseTheme = 'default' | 'graphite' | 'midnight' | 'aubergine';
+export type CpsRadiusTheme = 'default' | 'compact' | 'rounded' | 'pill';
 
 /**
  * CpsThemeService manages application theming including dark mode support.
@@ -39,11 +41,15 @@ export class CpsThemeService {
   private document = inject(DOCUMENT);
   private readonly THEME_STORAGE_KEY = 'cps-theme-preference';
   private readonly COLOR_THEME_STORAGE_KEY = 'cps-color-theme-preference';
+  private readonly BASE_THEME_STORAGE_KEY = 'cps-base-theme-preference';
+  private readonly RADIUS_THEME_STORAGE_KEY = 'cps-radius-theme-preference';
   private readonly TRANSITION_CLASS = 'cps-theme-transition';
   private readonly TRANSITION_DURATION = 500;
 
   private _theme = signal<CpsTheme>(this.getInitialTheme());
   private _colorTheme = signal<CpsColorTheme>(this.getInitialColorTheme());
+  private _baseTheme = signal<CpsBaseTheme>(this.getInitialBaseTheme());
+  private _radiusTheme = signal<CpsRadiusTheme>(this.getInitialRadiusTheme());
 
   /**
    * Current active theme (readonly)
@@ -56,6 +62,16 @@ export class CpsThemeService {
   readonly colorTheme = this._colorTheme.asReadonly();
 
   /**
+   * Current active base theme (readonly)
+   */
+  readonly baseTheme = this._baseTheme.asReadonly();
+
+  /**
+   * Current active radius theme (readonly)
+   */
+  readonly radiusTheme = this._radiusTheme.asReadonly();
+
+  /**
    * Whether dark mode is currently active
    */
   readonly isDark = computed(() => this._theme() === 'dark');
@@ -63,7 +79,12 @@ export class CpsThemeService {
   constructor() {
     // Apply theme changes to DOM whenever theme signal changes
     effect(() => {
-      this.applyTheme(this._theme(), this._colorTheme());
+      this.applyTheme(
+        this._theme(),
+        this._colorTheme(),
+        this._baseTheme(),
+        this._radiusTheme()
+      );
     });
 
     // Listen for system theme changes
@@ -118,9 +139,52 @@ export class CpsThemeService {
     }
   }
 
-  private applyTheme(theme: CpsTheme, colorTheme: CpsColorTheme): void {
+  /**
+   * Set base background theme (primarily affects dark mode)
+   */
+  setBaseTheme(baseTheme: CpsBaseTheme, animated = true): void {
+    if (this._baseTheme() === baseTheme) return;
+
+    if (animated) {
+      this.enableTransition();
+    }
+
+    this._baseTheme.set(baseTheme);
+    this.saveBaseThemePreference(baseTheme);
+
+    if (animated) {
+      setTimeout(() => this.disableTransition(), this.TRANSITION_DURATION);
+    }
+  }
+
+  /**
+   * Set radius profile
+   */
+  setRadiusTheme(radiusTheme: CpsRadiusTheme, animated = true): void {
+    if (this._radiusTheme() === radiusTheme) return;
+
+    if (animated) {
+      this.enableTransition();
+    }
+
+    this._radiusTheme.set(radiusTheme);
+    this.saveRadiusThemePreference(radiusTheme);
+
+    if (animated) {
+      setTimeout(() => this.disableTransition(), this.TRANSITION_DURATION);
+    }
+  }
+
+  private applyTheme(
+    theme: CpsTheme,
+    colorTheme: CpsColorTheme,
+    baseTheme: CpsBaseTheme,
+    radiusTheme: CpsRadiusTheme
+  ): void {
     this.document.documentElement.setAttribute('data-theme', theme);
     this.document.documentElement.setAttribute('data-color-theme', colorTheme);
+    this.document.documentElement.setAttribute('data-base-theme', baseTheme);
+    this.document.documentElement.setAttribute('data-radius-theme', radiusTheme);
   }
 
   private enableTransition(): void {
@@ -151,15 +215,48 @@ export class CpsThemeService {
 
     if (
       stored === 'neutral' ||
-      stored === 'amber' ||
-      stored === 'green' ||
-      stored === 'luxury' ||
-      stored === 'cps'
+      stored === 'calm' ||
+      stored === 'energy' ||
+      stored === 'passion'
     ) {
       return stored;
     }
 
     return 'neutral';
+  }
+
+  private getInitialBaseTheme(): CpsBaseTheme {
+    const stored = localStorage.getItem(
+      this.BASE_THEME_STORAGE_KEY
+    ) as CpsBaseTheme | null;
+
+    if (
+      stored === 'default' ||
+      stored === 'graphite' ||
+      stored === 'midnight' ||
+      stored === 'aubergine'
+    ) {
+      return stored;
+    }
+
+    return 'default';
+  }
+
+  private getInitialRadiusTheme(): CpsRadiusTheme {
+    const stored = localStorage.getItem(
+      this.RADIUS_THEME_STORAGE_KEY
+    ) as CpsRadiusTheme | null;
+
+    if (
+      stored === 'default' ||
+      stored === 'compact' ||
+      stored === 'rounded' ||
+      stored === 'pill'
+    ) {
+      return stored;
+    }
+
+    return 'default';
   }
 
   private getSystemTheme(): CpsTheme {
@@ -185,5 +282,13 @@ export class CpsThemeService {
 
   private saveColorThemePreference(colorTheme: CpsColorTheme): void {
     localStorage.setItem(this.COLOR_THEME_STORAGE_KEY, colorTheme);
+  }
+
+  private saveBaseThemePreference(baseTheme: CpsBaseTheme): void {
+    localStorage.setItem(this.BASE_THEME_STORAGE_KEY, baseTheme);
+  }
+
+  private saveRadiusThemePreference(radiusTheme: CpsRadiusTheme): void {
+    localStorage.setItem(this.RADIUS_THEME_STORAGE_KEY, radiusTheme);
   }
 }

@@ -179,6 +179,14 @@ $animation-duration: 150ms;
 .cps-dialog .cps-dialog-header-action-buttons {
   display: flex;
   align-items: center;
+
+  .cps-dialog-header-action-button {
+    border-radius: var(--cps-radius-sm);
+
+    &:hover {
+      background: var(--cps-highlight-hover);
+    }
+  }
 }
 
 .cps-dialog-top .cps-dialog,

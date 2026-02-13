@@ -167,18 +167,25 @@ export class CpsTooltipDirective implements OnDestroy {
       popup.style.opacity = '1';
     });
 
-    const coords = this._getCoords();
-    if (!coords) {
+    const placement = this._getCoords();
+    if (!placement) {
       this._destroyTooltip();
       throw new Error('Not enough space on the screen for the tooltip!');
     }
 
-    popup.style.left = coords.left.toString() + 'px';
-    popup.style.top = coords.top.toString() + 'px';
+    popup.style.left = placement.left.toString() + 'px';
+    popup.style.top = placement.top.toString() + 'px';
+    popup.setAttribute('data-tooltip-position', placement.position);
   }
 
-  private _getCoords(): { left: number; top: number } | undefined {
-    const isInsideScreen = (coords: { left: number; top: number }): boolean => {
+  private _getCoords():
+    | { left: number; top: number; position: CpsTooltipPosition }
+    | undefined {
+    const isInsideScreen = (coords: {
+      left: number;
+      top: number;
+      position: CpsTooltipPosition;
+    }): boolean => {
       return (
         coords.top >= 0 &&
         coords.left >= 0 &&
@@ -219,6 +226,7 @@ export class CpsTooltipDirective implements OnDestroy {
   ): {
     left: number;
     top: number;
+    position: CpsTooltipPosition;
   } {
     switch (position) {
       case 'bottom':
@@ -227,7 +235,8 @@ export class CpsTooltipDirective implements OnDestroy {
             targetElRect.left +
             this.window.scrollX +
             (targetEl.offsetWidth - popupRect.width) / 2,
-          top: targetElRect.bottom + this.window.scrollY + this.tooltipOffset
+          top: targetElRect.bottom + this.window.scrollY + this.tooltipOffset,
+          position
         };
       case 'left':
         return {
@@ -239,7 +248,8 @@ export class CpsTooltipDirective implements OnDestroy {
           top:
             targetElRect.top +
             this.window.scrollY +
-            (targetEl.offsetHeight - popupRect.height) / 2
+            (targetEl.offsetHeight - popupRect.height) / 2,
+          position
         };
       case 'right':
         return {
@@ -247,7 +257,8 @@ export class CpsTooltipDirective implements OnDestroy {
           top:
             targetElRect.top +
             this.window.scrollY +
-            (targetEl.offsetHeight - popupRect.height) / 2
+            (targetEl.offsetHeight - popupRect.height) / 2,
+          position
         };
       default:
         return {
@@ -259,7 +270,8 @@ export class CpsTooltipDirective implements OnDestroy {
             targetElRect.top +
             this.window.scrollY -
             popupRect.height -
-            this.tooltipOffset
+            this.tooltipOffset,
+          position: 'top'
         };
     }
   }

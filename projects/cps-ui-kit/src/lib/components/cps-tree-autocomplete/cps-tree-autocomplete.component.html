@@ -1,7 +1,7 @@
 <div
   [ngStyle]="{ width: cvtWidth }"
   class="cps-treeautocomplete"
-  tabindex="1"
+  tabindex="0"
   [ngClass]="{ disabled: disabled, error: error, active: isActive() }"
   #componentContainer>
   @if (label) {
@@ -110,6 +110,7 @@
             #treeAutocompleteInput
             class="cps-treeautocomplete-box-input"
             spellcheck="false"
+            [attr.aria-label]="label || placeholder || 'Tree autocomplete'"
             [placeholder]="
               (!treeSelection && !multiple) ||
               (treeSelection?.length < 1 && multiple)
@@ -238,6 +239,7 @@
     #treeAutocompleteInput
     class="cps-treeautocomplete-box-input"
     spellcheck="false"
+    [attr.aria-label]="label || placeholder || 'Tree autocomplete'"
     [class]="inputClass"
     [style]="inputStyle"
     [placeholder]="

@@ -13,7 +13,7 @@
     @for (name of filteredIconsList; track name) {
       <div class="icon-row" (click)="onCopyIconName(name)">
         <cps-icon [icon]="name" size="normal"></cps-icon>
-        <span>{{ name }}</span>
+        <span [style.color]="'var(--cps-text-primary)'">{{ name }}</span>
       </div>
     }
   </div>

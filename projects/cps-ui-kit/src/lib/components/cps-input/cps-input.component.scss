@@ -81,10 +81,6 @@ $hover-transition-duration: 0.2s;
           pointer-events: none;
         }
 
-        &[type='password'] {
-          font-family: Verdana;
-        }
-
         // Override browser autofill styles
         &:-webkit-autofill,
         &:-webkit-autofill:hover,
@@ -203,7 +199,26 @@ $hover-transition-duration: 0.2s;
       &.underlined {
         input {
           border-bottom: 1px solid $input-border-color !important;
+          background: transparent;
           box-shadow: none !important;
+        }
+      }
+
+      &.borderless {
+        input {
+          background: var(--cps-surface-muted);
+          box-shadow: none !important;
+        }
+
+        &:hover {
+          input:enabled:not(:read-only) {
+            background: var(--cps-highlight-hover);
+          }
+        }
+
+        input:focus:not(:read-only) {
+          background: var(--cps-highlight-selected);
+          border-color: transparent !important;
         }
       }
     }
@@ -229,6 +244,7 @@ $hover-transition-duration: 0.2s;
 
     .cps-input-hint {
       color: $input-hint-color;
+      font-family: inherit;
       font-size: 0.75rem;
       min-height: 1.125rem;
       line-height: 1.125rem;
@@ -236,6 +252,7 @@ $hover-transition-duration: 0.2s;
     }
     .cps-input-error {
       color: $color-error;
+      font-family: inherit;
       font-weight: bold;
       font-size: 0.75rem;
       min-height: 1.125rem;

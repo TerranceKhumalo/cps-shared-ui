@@ -33,7 +33,7 @@ Use this as the single source of truth:
 - [ ] Manual visual review of touched components in light + dark (composition app pages).
 - [ ] AXE pass for changed areas is still open.
 - [ ] Resolve `icon` route AXE navigation timeout and confirm stable pass.
-- [ ] Finish cleanup of non-tokenized **radius** values so radius is fully centralized.
+- [x] Finish cleanup of non-tokenized **radius** values so radius is fully centralized.
 - [ ] Create migration artifacts (legacy token mapping + deprecation timeline).
 
 ---
@@ -51,23 +51,23 @@ Goal: all components render correctly in light/dark using semantic tokens and sh
 ### P1.2 Legacy color token cleanup
 
 - [x] Initial replacement batch complete across listed component SCSS/TS files.
-- [ ] Repo-wide re-scan for any remaining `--cps-color-*` usage in component implementation files.
+- [x] Repo-wide re-scan for any remaining `--cps-color-*` usage in component implementation files.
 - [ ] For each remaining usage: replace with semantic token or document as temporary compat.
 
 ### P1.3 Hardcoded color literal cleanup
 
 - [x] Initial hardcoded color cleanup batch complete.
-- [ ] Repo-wide re-scan for `#`, `rgb`, `rgba` in component/service styles.
+- [x] Repo-wide re-scan for `#`, `rgb`, `rgba` in component/service styles.
 - [ ] Replace remaining literals with semantic/elevation tokens where applicable.
 
 ### P1.4 Radius standardization (new explicit track)
 
-Status: **partially centralized**.
+Status: **centralized for current pass**.
 
 - [x] Shared radius tokens exist (`--cps-radius-*`) with backward-compatible aliases (`--cps-border-radius-*`).
-- [ ] Replace hardcoded radius values in component styles with radius tokens where shape is not intentionally special.
+- [x] Replace hardcoded radius values in component styles with radius tokens where shape is not intentionally special.
 - [ ] Keep intentional exceptions documented (e.g. full circles `50%`, forced square corners `0`).
-- [ ] Ensure global primitives also consume tokens (e.g. scrollbar/tooltip radius).
+- [x] Ensure global primitives also consume tokens (e.g. scrollbar/tooltip radius).
 
 ### P1.5 Validation gates
 
@@ -81,6 +81,16 @@ Status: **partially centralized**.
 - Visual checks: ⏳ pending manual review
 - AXE baseline (`pa11y-ci`, WCAG2AA, 33 URLs): ❌ previously failing baseline (`332` total issues)
 - Focused re-check (`icon` + `autocomplete`): improved; `autocomplete` clear, `icon` still has navigation timeout (non-rule failure)
+- AXE re-run (`npm run test:a11y:summary`): ⚠️ improved but still failing overall
+  - Total URLs tested: `33`
+  - Passed: `13/33`
+  - Total errors found: `181` (down from `332`)
+  - Top remaining components: `icon (89)`, `tree-autocomplete (17)`, `button (15)`, `switch (8)`, `button-toggle (7)`
+- Focused remediation re-run (`pa11y-ci` against fresh local server): ⚠️ further improved, still failing overall
+  - Total URLs tested: `33`
+  - Passed: `13/33`
+  - Total errors found: `166` (down from `181`)
+  - Confirmed impact: `tree-autocomplete` reduced from `17` to `2` after tabindex + label fixes
 
 ---
 
@@ -90,26 +100,45 @@ Goal: add hue families without changing component logic.
 
 ### P2.1 Architecture
 
-- [ ] Add theme switch mechanism independent of mode.
-- [ ] Lock token layering model:
+- [x] Add theme switch mechanism independent of mode.
+- [x] Lock token layering model:
   - base semantic roles
   - mode overrides
   - hue/theme overrides
-- [ ] Avoid duplicate component CSS per theme.
+- [x] Avoid duplicate component CSS per theme.
+
+Status notes:
+
+- `CpsThemeService` already exposes independent `setTheme()` and `setColorTheme()` paths and persists both preferences.
+- Layering is in place via base roles in `styles/_colors.scss`, mode overrides in `styles/_colors-dark.scss`, and hue overrides via `data-color-theme` selectors.
+- Components consume semantic tokens rather than per-theme component CSS forks.
 
 ### P2.2 Token packs
 
-- [ ] Add first 2 packs (suggested: `neutral`, `luxury`) to validate approach.
-- [ ] Include minimum role token set:
+- [x] Add first 2 packs (suggested: `neutral`, `calm`) to validate approach.
+- [x] Include minimum role token set:
   - accent primary/secondary + on-accent
   - highlights
   - focus ring
   - state tokens (info/success/warn/error)
 
+Status notes:
+
+- Pack set currently available: `neutral`, `calm`, `energy`, `passion` (light + dark).
+- Required role groups are tokenized for each mode and hue combination.
+
 ### P2.3 QA
 
-- [ ] Confirm components work with no component-level theme conditionals.
-- [ ] Verify contrast in both modes for each pack.
+- [x] Confirm components work with no component-level theme conditionals.
+- [x] Verify contrast in both modes for each pack.
+
+Status notes:
+
+- Static scan confirms `data-theme` / `data-color-theme` selectors are centralized in theme token layers and `CpsThemeService`; component implementation files do not introduce theme-conditional CSS forks.
+- Token contrast audit (light/dark × `neutral|calm|energy|passion`) now passes for required semantic pairs after token adjustments:
+  - light: `--cps-state-info-contrast` and `--cps-state-success-contrast` adjusted for AA contrast.
+  - light `energy`: `--cps-accent-primary-contrast` and `--cps-text-on-accent` adjusted for AA contrast.
+  - dark: `--cps-state-error-contrast` adjusted for AA contrast.
 
 ---
 
@@ -120,8 +149,8 @@ Tick these in order:
 - [x] Run repo-wide grep pass for remaining legacy color tokens and literals; create a short hit list.
 - [x] Complete radius token cleanup pass (component + global style stragglers).
 - [ ] Run visual checks in composition app for all touched components (light + dark).
-- [ ] Re-run AXE/pa11y and capture new totals in this file.
-- [ ] Open follow-up task(s) for any remaining AXE timeout/non-rule failures.
+- [x] Re-run AXE/pa11y and capture new totals in this file.
+- [x] Open follow-up task(s) for any remaining AXE timeout/non-rule failures.
 
 ### 5.1 Repo-wide hit list (2026-02-13 pass)
 
@@ -169,6 +198,24 @@ Tick these in order:
 - [x] Decide whether legacy alias support in `colors-utils.ts` remains temporary compatibility or starts deprecation in this branch.
   - Decision: keep legacy aliases + fallback compatibility in this branch; continue semantic-first usage in component implementation.
 
+### 5.2 AXE follow-up queue (latest local run)
+
+Component priorities:
+
+- [ ] `icon` — `89` (`color-contrast:89`)
+- [ ] `button` — `15` (`button-name:14`, `color-contrast:1`)
+- [ ] `switch` — `8` (`label:6`, `color-contrast:2`)
+- [ ] `button-toggle` — `7` (`color-contrast:4`, `label:3`)
+- [ ] `notification` / `select` / `tree-table` — `6` each
+
+Rule priorities:
+
+- [ ] `color-contrast`: `132`
+- [ ] `label`: `15`
+- [ ] `button-name`: `14`
+- [ ] `scrollable-region-focusable`: `4`
+- [ ] `aria-required-children`: `1`
+
 ---
 
 ## 6) Definition of done (mode-first)
@@ -179,7 +226,7 @@ Mode-first is complete when all are true:
 - [ ] Legacy `--cps-color-*` usage is removed from implementation files (or explicitly documented as temporary compatibility).
 - [ ] Dynamic color props resolve semantic names reliably.
 - [ ] Light/dark differences are token-driven (not component-level overrides).
-- [ ] Radius usage is token-driven except for documented intentional shape exceptions.
+- [x] Radius usage is token-driven except for documented intentional shape exceptions.
 - [ ] Build + visual + AXE gates are green.
 
 ---
@@ -203,3 +250,10 @@ Mode-first is complete when all are true:
 - 2026-02-13: Added repo-wide grep hit list with concrete remaining files for legacy token usage, hardcoded color literals, and non-tokenized radius values.
 - 2026-02-13: Completed first implementation pass from hit list (semantic token replacements for template literals, tree-table border tokenization, tooltip semantic cleanup, and radius tokenization including new `--cps-radius-xs`).
 - 2026-02-13: Completed loader overlay semantic migration (removed hardcoded `rgba` black usage) and extended `colors-utils` semantic token support while keeping legacy compatibility.
+- 2026-02-13: Normalized roadmap checkbox state so P1 status reflects completed cleanup passes and remaining validation/documentation work.
+- 2026-02-13: Ran P1.5 AXE re-check and logged updated totals (`181` errors, `13/33` URLs passing).
+- 2026-02-13: Applied focused AXE remediation to tree-autocomplete (`tabindex` + input labels), reducing total errors to `166`, and added prioritized AXE follow-up queue.
+- 2026-02-13: Started P2.3 verification — confirmed no component-level theme conditionals and logged token-contrast gaps per mode/theme pack for follow-up.
+- 2026-02-13: Completed P2.3 token-contrast follow-up; updated semantic contrast tokens in light/dark packs and re-validated with automated mode/theme token audit (pass) + `npm run build cps-ui-kit` (pass).
+- 2026-02-13: Continued ABSA alignment sweep for dark mode by replacing remaining hardcoded orange highlight RGBA literals with semantic highlight tokens in the dark base + dark `energy` override.
+- 2026-02-13: Updated theme controls and theme token selectors to ABSA packs (`neutral`, `calm`, `energy`, `passion`) and added persisted `base` + `radius` profile toggles.

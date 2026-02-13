@@ -42,14 +42,38 @@ describe('CpsThemeService', () => {
   });
 
   it('should save color theme preference to localStorage', () => {
-    service.setColorTheme('green', false);
-    expect(localStorage.getItem('cps-color-theme-preference')).toBe('green');
+    service.setColorTheme('energy', false);
+    expect(localStorage.getItem('cps-color-theme-preference')).toBe('energy');
   });
 
   it('should apply color theme to document attribute', () => {
-    service.setColorTheme('amber', false);
+    service.setColorTheme('calm', false);
     expect(document.documentElement.getAttribute('data-color-theme')).toBe(
-      'amber'
+      'calm'
+    );
+  });
+
+  it('should save base theme preference to localStorage', () => {
+    service.setBaseTheme('midnight', false);
+    expect(localStorage.getItem('cps-base-theme-preference')).toBe('midnight');
+  });
+
+  it('should apply base theme to document attribute', () => {
+    service.setBaseTheme('graphite', false);
+    expect(document.documentElement.getAttribute('data-base-theme')).toBe(
+      'graphite'
+    );
+  });
+
+  it('should save radius theme preference to localStorage', () => {
+    service.setRadiusTheme('rounded', false);
+    expect(localStorage.getItem('cps-radius-theme-preference')).toBe('rounded');
+  });
+
+  it('should apply radius theme to document attribute', () => {
+    service.setRadiusTheme('pill', false);
+    expect(document.documentElement.getAttribute('data-radius-theme')).toBe(
+      'pill'
     );
   });
 });
