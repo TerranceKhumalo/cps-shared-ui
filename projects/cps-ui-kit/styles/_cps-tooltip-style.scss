@@ -3,12 +3,12 @@
   top: 0;
   cursor: default;
   font-size: 14px;
-  background: #f9f5f6;
-  color: var(--cps-color-text-darkest);
+  background: var(--cps-popover-background);
+  color: var(--cps-popover-foreground);
   font-family: 'Source Sans Pro', sans-serif;
-  border: 1px solid var(--cps-color-calm);
+  border: 1px solid var(--cps-border-color);
   overflow-wrap: break-word;
-  border-radius: 3px;
+  border-radius: var(--cps-radius-sm);
   padding: 3px;
   transition: opacity 0.2s;
   opacity: 0;

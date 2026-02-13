@@ -773,7 +773,7 @@ export class CpsTreeTableComponent
         this.renderer.setStyle(
           this._headerBox,
           'border-right',
-          wScroll > 0 ? '1px solid #d7d5d5' : 'unset'
+          wScroll > 0 ? '1px solid var(--cps-border-color)' : 'unset'
         );
 
         this._calcAutoLayoutHeaderWidths();

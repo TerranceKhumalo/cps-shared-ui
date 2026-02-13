@@ -20,7 +20,7 @@ $animation-duration: 150ms;
   pointer-events: auto;
   transform: scale(1);
   position: relative;
-  border-radius: 4px;
+  border-radius: var(--cps-radius-sm);
   border: 0 none;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 1rem;

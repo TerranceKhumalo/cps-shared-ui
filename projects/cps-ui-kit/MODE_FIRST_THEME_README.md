@@ -1,160 +1,203 @@
 # CPS UI Kit — Mode-First Theme Roadmap
 
-This document tracks the migration plan to make **light/dark mode** consistent first, and add **theme packs** later (green/amber/neutral/luxury/etc.) without rework.
+This document is the working tracker for completing **mode-first theming** in `cps-ui-kit`.
 
-## 1) Working model (important)
+Use this as the single source of truth:
 
-- **Mode** = light vs dark (contrast, surfaces, readability).
+- If work is complete, tick it.
+- If blocked, mark it and add a short note.
+- If scope changes, update this file in the same PR.
+
+---
+
+## 1) Working model (locked)
+
+- **Mode** = light vs dark behavior (contrast, surfaces, readability).
 - **Theme** = hue personality (brand family).
-- Components should consume **semantic tokens** only (e.g. `--cps-text-primary`, `--cps-accent-primary`, `--cps-border-color`).
-- Avoid component-specific light/dark hacks unless there is a known accessibility exception.
+- Components consume semantic tokens only (example: `--cps-text-primary`, `--cps-accent-primary`, `--cps-border-color`).
+- No component-specific mode hacks unless there is a documented accessibility exception.
 
-## 2) Current state summary
+---
 
-### Good baseline already present
+## 2) Snapshot (2026-02-13)
 
-- Semantic token layer exists in:
-  - `styles/_colors.scss`
-  - `styles/_colors-dark.scss`
-- Global primitives already reference semantic variables in:
-  - `styles/styles.scss`
+### Completed
 
-### Gaps that block clean mode behavior
+- [x] Semantic color token layer exists in `styles/_colors.scss` and `styles/_colors-dark.scss`.
+- [x] Global primitives already use semantic variables in `styles/styles.scss`.
+- [x] Core mode-hardening batches from P1.1–P1.4 completed.
+- [x] Build gate passes (`npm run build cps-ui-kit`).
 
-1. **Legacy token usage in components** (`--cps-color-*`) still present in multiple files.
-2. **Hardcoded colors** (e.g. `#fff`, `rgba(...)`) still present in a few component/service styles.
-3. **Color utility fallback is legacy-only** in `src/lib/utils/colors-utils.ts`:
-   - `getCSSColor()` resolves unknown values to `var(--cps-color-${val})`.
-   - This makes semantic names like `text-primary`, `accent-primary`, etc. fragile unless passed as full CSS values.
+### Still missing (high confidence)
 
-## 3) Phase 1 — Mode hardening (now)
+- [ ] Manual visual review of touched components in light + dark (composition app pages).
+- [ ] AXE pass for changed areas is still open.
+- [ ] Resolve `icon` route AXE navigation timeout and confirm stable pass.
+- [ ] Finish cleanup of non-tokenized **radius** values so radius is fully centralized.
+- [ ] Create migration artifacts (legacy token mapping + deprecation timeline).
 
-Goal: all components should render correctly in both light/dark using semantic tokens only.
+---
 
-### P1.1 Token/utility foundation
+## 3) Active tracker — Mode hardening (P1)
 
-- [x] Update `getCSSColor()` to support semantic aliases first (e.g. `text-primary` -> `var(--cps-text-primary)`) and keep legacy compatibility.
-- [x] Add/confirm a token naming policy in this file for dynamic color inputs:
-  - semantic names (preferred)
-  - legacy names (temporary compatibility)
-  - full CSS values (`#hex`, `rgb`, `var(...)`, `currentColor`)
-- [x] Verify components using `getCSSColor()` still behave after alias support:
-  - button, icon, progress, tag, expansion panel, divider, paginator, tab-group, loader, checkbox.
+Goal: all components render correctly in light/dark using semantic tokens and shared design primitives.
 
-### P1.2 Replace remaining legacy tokens in component SCSS/TS
+### P1.1 Foundation
 
-Track each item as complete once semantic equivalent is used.
+- [x] `getCSSColor()` supports semantic aliases first and keeps legacy compatibility.
+- [x] Dynamic color input policy documented (semantic, legacy compat, raw CSS values).
+- [x] Existing `getCSSColor()` consumers verified.
 
-- [x] `src/lib/components/cps-button/cps-button.component.scss`
-- [x] `src/lib/components/cps-tree-table/cps-tree-table.component.scss`
-- [x] `src/lib/components/cps-tree-table/cps-tree-table.component.ts`
-- [x] `src/lib/components/cps-menu/cps-menu.component.scss`
-- [x] `src/lib/components/cps-select/cps-select.component.scss`
-- [x] `src/lib/components/cps-tree-select/cps-tree-select.component.scss`
-- [x] `src/lib/components/cps-radio-group/cps-radio-group.component.scss`
-- [x] `src/lib/components/cps-file-upload/cps-file-upload.component.scss`
-- [x] `src/lib/components/cps-timepicker/cps-timepicker.component.scss`
-- [x] `src/lib/components/cps-autocomplete/cps-autocomplete.component.scss`
-- [x] `src/lib/components/cps-tree-autocomplete/cps-tree-autocomplete.component.scss`
-- [x] `src/lib/components/cps-input/cps-input.component.scss`
-- [x] `src/lib/components/cps-textarea/cps-textarea.component.scss`
-- [x] `src/lib/components/cps-loader/cps-loader.component.scss`
-- [x] `src/lib/components/cps-tab-group/cps-tab-group.component.scss`
-- [x] `src/lib/components/cps-scheduler/cps-scheduler.component.scss`
-- [x] `src/lib/components/cps-table/components/internal/table-column-filter/table-column-filter.component.ts`
-- [x] `src/lib/services/cps-notification/internal/components/cps-toast/cps-toast.component.scss`
+### P1.2 Legacy color token cleanup
 
-### P1.3 Remove hardcoded color values from component styles
+- [x] Initial replacement batch complete across listed component SCSS/TS files.
+- [ ] Repo-wide re-scan for any remaining `--cps-color-*` usage in component implementation files.
+- [ ] For each remaining usage: replace with semantic token or document as temporary compat.
 
-- [x] `src/lib/components/cps-tree-table/cps-tree-table.component.scss` (`#ffffff`)
-- [x] `src/lib/components/cps-menu/cps-menu.component.scss` (`#0000001f`)
-- [x] `src/lib/services/cps-dialog/internal/components/cps-dialog/cps-dialog.component.scss` (`rgba(...)`/shadow literal)
-- [x] `src/lib/services/cps-notification/internal/components/cps-notification-container/cps-notification-container.component.scss` (`rgba(...)`)
-- [x] `src/lib/services/cps-notification/internal/components/cps-toast/cps-toast.component.scss` (shadow literal)
+### P1.3 Hardcoded color literal cleanup
 
-### P1.4 Consistency and accessibility pass
+- [x] Initial hardcoded color cleanup batch complete.
+- [ ] Repo-wide re-scan for `#`, `rgb`, `rgba` in component/service styles.
+- [ ] Replace remaining literals with semantic/elevation tokens where applicable.
 
-- [x] Verify state contrast for text/background/border in both modes (normal, hover, active, disabled).
-- [x] Verify overlay components (menu, datepicker, dialog, notification) share semantic surface/elevation behavior.
-- [x] Verify table + tree-table selected/hover/striping parity in both modes.
-- [x] Ensure buttons/chips/tags use consistent readable on-color strategy in dark mode.
+### P1.4 Radius standardization (new explicit track)
+
+Status: **partially centralized**.
+
+- [x] Shared radius tokens exist (`--cps-radius-*`) with backward-compatible aliases (`--cps-border-radius-*`).
+- [ ] Replace hardcoded radius values in component styles with radius tokens where shape is not intentionally special.
+- [ ] Keep intentional exceptions documented (e.g. full circles `50%`, forced square corners `0`).
+- [ ] Ensure global primitives also consume tokens (e.g. scrollbar/tooltip radius).
 
 ### P1.5 Validation gates
 
 - [x] Build passes: `npm run build cps-ui-kit`
-- [ ] Story/sandbox visual checks in light + dark for all touched components
-- [ ] AXE checks for contrast/focus-visible in changed areas
+- [ ] Visual checks pass in both modes for all touched areas.
+- [ ] AXE checks pass for changed areas (contrast/focus-visible and critical flows).
 
-#### P1.5 Execution log (latest)
+#### P1.5 execution log
 
-- Build (`npm run build cps-ui-kit`): ✅ Pass
-- Visual checks (light/dark): ⏳ Pending manual review in composition app pages
-- AXE/pa11y (`pa11y-ci`, WCAG2AA across 33 component URLs): ❌ Failing baseline
-  - Total URLs tested: `33`
-  - Passed: `0/33`
-  - Total errors found: `332`
-  - Highest-error components: `icon (91)`, `autocomplete (26)`, `timepicker (25)`, `scheduler (19)`, `tree-autocomplete (19)`, `tab-group (18)`, `button (17)`, `tree-table (13)`, `table (11)`, `switch (10)`
-  - Notes: AXE run was executed in-container after installing required headless Chromium runtime libraries.
+- Build (`npm run build cps-ui-kit`): ✅ pass
+- Visual checks: ⏳ pending manual review
+- AXE baseline (`pa11y-ci`, WCAG2AA, 33 URLs): ❌ previously failing baseline (`332` total issues)
+- Focused re-check (`icon` + `autocomplete`): improved; `autocomplete` clear, `icon` still has navigation timeout (non-rule failure)
 
-- Focused AXE remediation batch (`icon` + `autocomplete`): ✅ Significant reduction, still open
-  - Before: `115` total (`icon: 90`, `autocomplete: 25`)
-  - Latest: `0` AXE rule violations (`icon: timeout only`, `autocomplete: 0`)
-  - Remaining issues:
-    - `icon`: navigation timeout (non-rule failure)
-    - `autocomplete`: ✅ no remaining focused AXE rule violations
+---
 
-## 4) Phase 2 — Theme packs (later)
+## 4) Theme packs (P2, after P1 gates are green)
 
-Goal: introduce hue families without changing component logic.
+Goal: add hue families without changing component logic.
 
-### P2.1 Theme architecture
+### P2.1 Architecture
 
-- [ ] Add a theme switch mechanism independent of mode (e.g. `data-theme="green"` + mode attribute).
-- [ ] Define token layering strategy:
+- [ ] Add theme switch mechanism independent of mode.
+- [ ] Lock token layering model:
   - base semantic roles
-  - mode overrides (light/dark)
-  - theme hue overrides (green/amber/neutral/luxury)
+  - mode overrides
+  - hue/theme overrides
 - [ ] Avoid duplicate component CSS per theme.
 
-### P2.2 Theme token packs
+### P2.2 Token packs
 
-- [ ] Create first 2 packs (suggest: `neutral`, `luxury`) to validate model.
-- [ ] Include role tokens at minimum:
+- [ ] Add first 2 packs (suggested: `neutral`, `luxury`) to validate approach.
+- [ ] Include minimum role token set:
   - accent primary/secondary + on-accent
   - highlights
   - focus ring
-  - state colors (info/success/warn/error)
+  - state tokens (info/success/warn/error)
 
-### P2.3 Theme QA
+### P2.3 QA
 
-- [ ] Confirm all components work with no component-level theme conditionals.
-- [ ] Verify contrast in both modes for each theme pack.
+- [ ] Confirm components work with no component-level theme conditionals.
+- [ ] Verify contrast in both modes for each pack.
 
-## 5) Definition of done
+---
 
-Mode-first work is done when:
+## 5) Short-term execution queue (do next)
 
-- No component depends on hardcoded color literals for UI states.
-- Legacy `--cps-color-*` usage is removed from component implementation files (or documented as intentional temporary compatibility).
-- Dynamic color props resolve semantic names reliably.
-- Light/dark differences are token-driven, not component-override driven.
+Tick these in order:
 
-## 6) Parking lot (capture “don’t forget” items)
+- [x] Run repo-wide grep pass for remaining legacy color tokens and literals; create a short hit list.
+- [x] Complete radius token cleanup pass (component + global style stragglers).
+- [ ] Run visual checks in composition app for all touched components (light + dark).
+- [ ] Re-run AXE/pa11y and capture new totals in this file.
+- [ ] Open follow-up task(s) for any remaining AXE timeout/non-rule failures.
 
-Use this section continuously as we discover issues.
+### 5.1 Repo-wide hit list (2026-02-13 pass)
 
-- [ ] Confirm whether to preserve old public color names in API docs for backward compatibility.
-- [ ] Decide timeline for deprecating legacy color names in inputs.
-- [ ] Add a migration guide mapping old token names -> semantic token names.
-- [ ] Add visual regression snapshots for mode switch on key components.
+#### A) Legacy token touchpoints still present
 
-## 7) Change log for this plan
+- [ ] `src/lib/utils/colors-utils.ts`
+  - `LEGACY_COLOR_ALIASES` still maps legacy names to `--cps-color-*`.
+  - Fallback still returns `var(--cps-color-${normalized})`.
+  - `getCpsColors()` still filters token names by `--cps-color` prefix.
+- [x] `styles/_cps-tooltip-style.scss`
+  - Legacy token references replaced with semantic tokens.
+- [ ] `src/lib/components/cps-input/cps-input.component.scss`
+  - Contains legacy token names in inline comments (non-runtime, cleanup optional).
 
-- 2026-02-12: Initial mode-first roadmap created.
-- 2026-02-12: Completed first mode-first batch (utility semantic color resolution + button/menu/tree-table token cleanup).
-- 2026-02-12: Completed error-token cluster (select, autocomplete, tree-autocomplete, tree-select, radio-group, timepicker, input, textarea).
-- 2026-02-12: Completed remaining P1.2/P1.3 cleanup batch (file-upload, loader, tab-group, scheduler, tree-table.ts, table-column-filter.ts, toast/dialog/notification overlay literals).
-- 2026-02-12: Improved button dark-mode readability while preserving accent identity for outlined/borderless variants; marked buttons/chips/tags readability item complete.
-- 2026-02-12: Completed code-level P1.4 verification for state/overlay/table parity and confirmed getCSSColor consumer compatibility after semantic alias support.
-- 2026-02-12: Started P1.5 execution tracking with real run evidence; AXE baseline currently failing (332 issues across 33 routes).
-- 2026-02-12: Focused re-check confirms autocomplete route has zero AXE rule violations; icon route still reports a non-rule navigation timeout.
+#### B) Hardcoded color literals still present
+
+- [x] Disabled prefix icon color `#9a9595` in templates:
+  - `src/lib/components/cps-autocomplete/cps-autocomplete.component.html`
+  - `src/lib/components/cps-select/cps-select.component.html`
+  - `src/lib/components/cps-tree-select/cps-tree-select.component.html`
+  - `src/lib/components/cps-tree-autocomplete/cps-tree-autocomplete.component.html`
+  - `src/lib/components/cps-input/cps-input.component.html`
+- [x] `src/lib/services/cps-notification/internal/components/cps-toast/cps-toast.component.html`
+  - Filled icon color now uses semantic alias (`text-on-accent`).
+- [x] `src/lib/components/cps-tree-table/cps-tree-table.component.ts`
+  - Runtime style border color now uses semantic border token.
+- [ ] `src/lib/components/cps-loader/cps-loader.component.ts`
+  - Uses `rgba(0, 0, 0, x)` string for overlay background.
+- [x] `styles/_cps-tooltip-style.scss`
+  - Hardcoded background color replaced with semantic popover background token.
+
+#### C) Radius values not tokenized yet
+
+- [x] `src/lib/components/cps-chip/cps-chip.component.scss` (`border-radius: 14px`)
+- [x] `src/lib/components/cps-table/cps-table.component.scss` (`border-radius: 2px`)
+- [x] `src/lib/components/cps-tree-table/cps-tree-table.component.scss` (`border-radius: 2px`)
+- [x] `src/lib/services/cps-dialog/internal/components/cps-dialog/cps-dialog.component.scss` (multiple `4px` radius declarations)
+- [x] `src/lib/services/cps-notification/internal/components/cps-notification-container/cps-notification-container.component.scss` (`border-radius: 4px`)
+- [x] `styles/_cps-tooltip-style.scss` (`border-radius: 3px`)
+- [x] `styles/styles.scss` (`::-webkit-scrollbar-thumb { border-radius: 4px; }`)
+
+#### D) Notes for cleanup execution
+
+- [ ] Keep intentional shape exceptions documented (`50%`, `0`, `unset`) and out of cleanup scope unless design changes.
+- [ ] Decide whether legacy alias support in `colors-utils.ts` remains temporary compatibility or starts deprecation in this branch.
+
+---
+
+## 6) Definition of done (mode-first)
+
+Mode-first is complete when all are true:
+
+- [ ] No component depends on hardcoded color literals for UI states.
+- [ ] Legacy `--cps-color-*` usage is removed from implementation files (or explicitly documented as temporary compatibility).
+- [ ] Dynamic color props resolve semantic names reliably.
+- [ ] Light/dark differences are token-driven (not component-level overrides).
+- [ ] Radius usage is token-driven except for documented intentional shape exceptions.
+- [ ] Build + visual + AXE gates are green.
+
+---
+
+## 7) Parking lot / decisions to close
+
+- [ ] Confirm if old public color names stay in API docs for backward compatibility.
+- [ ] Decide deprecation timeline for legacy color input names.
+- [ ] Add migration guide mapping legacy token names -> semantic token names.
+- [ ] Add visual regression snapshots for key mode-switch components.
+
+---
+
+## 8) Change log
+
+- 2026-02-12: Initial roadmap created.
+- 2026-02-12: Completed major P1 token/literal cleanup batches and utility compatibility updates.
+- 2026-02-12: Build gate confirmed pass; AXE baseline captured (failing baseline documented).
+- 2026-02-12: Focused AXE remediation reduced `autocomplete`; `icon` timeout remained.
+- 2026-02-13: Second-pass tracker refactor — added explicit snapshot, execution queue, and dedicated radius-standardization track.
+- 2026-02-13: Added repo-wide grep hit list with concrete remaining files for legacy token usage, hardcoded color literals, and non-tokenized radius values.
+- 2026-02-13: Completed first implementation pass from hit list (semantic token replacements for template literals, tree-table border tokenization, tooltip semantic cleanup, and radius tokenization including new `--cps-radius-xs`).

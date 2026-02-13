@@ -29,7 +29,7 @@
 }
 ::-webkit-scrollbar-thumb {
   background: var(--cps-border-color);
-  border-radius: 4px;
+  border-radius: var(--cps-radius-sm);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--cps-accent-primary);

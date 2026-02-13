@@ -91,7 +91,7 @@ $animation-duration: 150ms;
   pointer-events: auto;
   transform: scale(1);
   position: relative;
-  border-radius: 4px;
+  border-radius: var(--cps-radius-sm);
   box-shadow: var(--cps-shadow-sm);
   border: 0 none;
   font-family: 'Source Sans Pro', sans-serif;
@@ -106,8 +106,8 @@ $animation-duration: 150ms;
     background: var(--cps-surface-body);
     color: var(--cps-text-secondary);
     padding: 1rem;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
+    border-top-right-radius: var(--cps-radius-sm);
+    border-top-left-radius: var(--cps-radius-sm);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -149,8 +149,8 @@ $animation-duration: 150ms;
 }
 
 .cps-dialog .cps-dialog-content:last-of-type {
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: var(--cps-radius-sm);
+  border-bottom-left-radius: var(--cps-radius-sm);
 }
 
 .cps-dialog-content {

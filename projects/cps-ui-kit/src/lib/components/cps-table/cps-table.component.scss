@@ -359,7 +359,7 @@ $tbar-normal-height: 72px;
       height: 18px;
       color: var(--cps-text-secondary);
       border: 2px solid var(--cps-text-muted);
-      border-radius: 2px;
+      border-radius: var(--cps-radius-xs);
       transition:
         background-color 0.2s,
         color 0.2s,
