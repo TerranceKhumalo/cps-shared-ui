@@ -8,6 +8,92 @@ const isSameDomain = (styleSheet: any, _window: Window): boolean => {
 
 const isStyleRule = (rule: any): boolean => rule.type === 1;
 
+const SEMANTIC_COLOR_ALIASES: Record<string, string> = {
+  'accent-primary': '--cps-accent-primary',
+  'accent-secondary': '--cps-accent-secondary',
+  'text-primary': '--cps-text-primary',
+  'text-secondary': '--cps-text-secondary',
+  'text-muted': '--cps-text-muted',
+  'text-disabled': '--cps-text-disabled',
+  'text-on-accent': '--cps-text-on-accent',
+  'surface-body': '--cps-surface-body',
+  'surface-highlight': '--cps-surface-highlight',
+  'surface-muted': '--cps-surface-muted',
+  'surface-elevated': '--cps-surface-elevated',
+  'surface-control': '--cps-surface-control',
+  'border-color': '--cps-border-color',
+  'border-strong': '--cps-border-strong',
+  'border-focus': '--cps-border-focus',
+  'highlight-hover': '--cps-highlight-hover',
+  'highlight-active': '--cps-highlight-active',
+  'highlight-selected': '--cps-highlight-selected',
+  'state-info': '--cps-state-info',
+  'state-success': '--cps-state-success',
+  'state-warn': '--cps-state-warn',
+  'state-error': '--cps-state-error',
+  'ring-color': '--cps-ring-color',
+  'background-color': '--cps-background-color',
+  'background-disabled': '--cps-background-disabled',
+  white: '--cps-text-on-accent',
+  black: '--cps-text-primary'
+};
+
+const LEGACY_COLOR_ALIASES: Record<string, string> = {
+  calm: '--cps-color-calm',
+  luxury: '--cps-color-luxury',
+  energy: '--cps-color-energy',
+  warmth: '--cps-color-warmth',
+  passion: '--cps-color-passion',
+  surprise: '--cps-color-surprise',
+  prepared: '--cps-color-prepared',
+  agile: '--cps-color-agile',
+  care: '--cps-color-care',
+  smile: '--cps-color-smile',
+  human: '--cps-color-human',
+  grounded: '--cps-color-grounded',
+  depth: '--cps-color-depth',
+  info: '--cps-color-info',
+  success: '--cps-color-success',
+  warn: '--cps-color-warn',
+  error: '--cps-color-error',
+  'text-light': '--cps-color-text-light',
+  'text-mild': '--cps-color-text-mild',
+  'text-dark': '--cps-color-text-dark',
+  'text-darkest': '--cps-color-text-darkest',
+  'line-mid': '--cps-color-line-mid',
+  'line-dark': '--cps-color-line-dark'
+};
+
+const normalizeTokenName = (value: string): string => value.trim().toLowerCase();
+
+const getColorTokenVar = (value: string): string => {
+  const normalized = normalizeTokenName(value);
+
+  if (normalized.startsWith('--cps-')) {
+    return `var(${normalized})`;
+  }
+
+  if (normalized.startsWith('cps-')) {
+    return `var(--${normalized})`;
+  }
+
+  const semanticAlias = SEMANTIC_COLOR_ALIASES[normalized];
+  if (semanticAlias) {
+    return `var(${semanticAlias})`;
+  }
+
+  const legacyAlias = LEGACY_COLOR_ALIASES[normalized];
+  if (legacyAlias) {
+    return `var(${legacyAlias})`;
+  }
+
+  if (normalized.includes('-')) {
+    return `var(--cps-${normalized})`;
+  }
+
+  return `var(--cps-color-${normalized})`;
+};
+
 const isValidCSSColor = (val: string, _document: Document): boolean => {
   if (val === 'currentColor') return true;
   const element = _document.createElement('div');
@@ -66,7 +152,15 @@ export const getCpsColors = (_document: Document): [string, string][] =>
 
 export const getCSSColor = (val: string, _document: Document): string => {
   if (!val) return '';
-  return isValidCSSColor(val, _document) ? val : `var(--cps-color-${val})`;
+  const normalized = val.trim();
+
+  if (normalized.startsWith('var(')) {
+    return normalized;
+  }
+
+  return isValidCSSColor(normalized, _document)
+    ? normalized
+    : getColorTokenVar(normalized);
 };
 
 export const getTextColor = (backgroundColor: string): string => {

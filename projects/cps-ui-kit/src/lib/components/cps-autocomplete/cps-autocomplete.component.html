@@ -1,7 +1,7 @@
 <div
   [ngStyle]="{ width: cvtWidth }"
   class="cps-autocomplete"
-  tabindex="1"
+  [attr.tabindex]="disabled ? -1 : 0"
   [ngClass]="{
     disabled: disabled,
     error: error || externalError,
@@ -10,7 +10,7 @@
   #autocompleteContainer>
   @if (label) {
     <div class="cps-autocomplete-label">
-      <label>{{ label }}</label>
+      <label [attr.for]="inputId">{{ label }}</label>
       @if (infoTooltip) {
         <cps-info-circle
           class="cps-autocomplete-label-info-circle"
@@ -127,8 +127,10 @@
         } @else {
           <input
             #autocompleteInput
+            [id]="inputId"
             class="cps-autocomplete-box-input"
             spellcheck="false"
+            [attr.aria-label]="label || placeholder || 'Autocomplete input'"
             [placeholder]="
               (!multiple && isEmptyValue()) || (value?.length < 1 && multiple)
                 ? placeholder
@@ -279,10 +281,12 @@
   let-inputStyle="inputStyle">
   <input
     #autocompleteInput
+    [id]="inputId"
     class="cps-autocomplete-box-input"
     spellcheck="false"
     [class]="inputClass"
     [style]="inputStyle"
+    [attr.aria-label]="label || placeholder || 'Autocomplete input'"
     [placeholder]="
       (!multiple && isEmptyValue()) || (value?.length < 1 && multiple)
         ? placeholder

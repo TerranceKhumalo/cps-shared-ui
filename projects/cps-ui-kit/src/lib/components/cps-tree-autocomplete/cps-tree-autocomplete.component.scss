@@ -1,5 +1,5 @@
 $color-calm: var(--cps-accent-primary);
-$color-error: var(--cps-color-error);
+$color-error: var(--cps-state-error);
 $error-background: var(--cps-error-background);
 $treeautocomplete-placeholder-color: var(--cps-text-muted);
 $treeautocomplete-label-color: var(--cps-text-primary);
@@ -9,7 +9,7 @@ $treeautocomplete-hint-color: var(--cps-text-muted);
 $option-hover-background: var(--cps-highlight-hover);
 $selected-option-background: var(--cps-highlight-selected);
 $option-highlight-background: var(--cps-highlight-active);
-$option-highlight-selected-background: var(--cps-highlight-selected-dark);
+$option-highlight-selected-background: var(--cps-highlight-selected);
 $treeautocomplete-option-info-color: var(--cps-text-muted);
 $treeautocomplete-option-value-color: var(--cps-text-secondary);
 $treeautocomplete-about-remove-color: var(--cps-text-muted);

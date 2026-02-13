@@ -1070,7 +1070,7 @@ export class CpsTreeTableComponent
             this.renderer.setStyle(
               td,
               'border-left-color',
-              'var(--cps-color-line-mid)'
+              'var(--cps-border-color)'
             );
         });
       });

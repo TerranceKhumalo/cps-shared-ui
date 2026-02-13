@@ -1,4 +1,4 @@
-$cps-overlay-background: rgba(0, 0, 0, 0.2);
+$cps-overlay-background: var(--cps-surface-overlay);
 $animation-duration: 150ms;
 
 .cps-notification-container-mask {

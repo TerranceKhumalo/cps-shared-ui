@@ -71,6 +71,10 @@ export type CpsAutocompleteAppearanceType =
 export class CpsAutocompleteComponent
   implements ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy
 {
+  private static nextAutocompleteId = 0;
+
+  inputId = `cps-autocomplete-input-${CpsAutocompleteComponent.nextAutocompleteId++}`;
+
   /**
    * Label of the autocomplete component.
    * @group Props

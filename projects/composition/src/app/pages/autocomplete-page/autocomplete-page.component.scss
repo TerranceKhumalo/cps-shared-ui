@@ -4,6 +4,14 @@
   flex-direction: column;
 }
 
+:host ::ng-deep cps-autocomplete {
+  .cps-autocomplete-label label,
+  .cps-autocomplete-hint {
+    color: var(--cps-text-primary) !important;
+    opacity: 1 !important;
+  }
+}
+
 .sync-val-example {
   display: flex;
   align-items: center;

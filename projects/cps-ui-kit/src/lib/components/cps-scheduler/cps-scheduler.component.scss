@@ -35,7 +35,18 @@
         align-items: center;
 
         &-disabled {
-          color: var(--cps-color-text-light);
+          color: var(--cps-text-secondary);
+
+          ::ng-deep {
+            .cps-select.disabled .cps-select-box-items,
+            .cps-select.disabled .cps-select-box-items .text-group,
+            .cps-select.disabled .cps-select-box-items .single-item,
+            .cps-autocomplete.disabled .cps-autocomplete-box-items,
+            .cps-autocomplete.disabled .cps-autocomplete-box-items .text-group,
+            .cps-autocomplete.disabled .cps-autocomplete-box-items .single-item {
+              color: var(--cps-text-secondary) !important;
+            }
+          }
         }
       }
 
@@ -49,7 +60,7 @@
     }
 
     &-disabled {
-      color: var(--cps-color-text-light);
+      color: var(--cps-text-disabled);
     }
   }
 }

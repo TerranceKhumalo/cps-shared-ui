@@ -1,5 +1,3 @@
-@use '../../../../variables.scss' as vars;
-
 .search-input {
   margin-bottom: 24px;
 }
@@ -17,11 +15,11 @@
   cursor: pointer;
 
   cps-icon {
-    color: vars.$color-calm;
+    color: var(--cps-text-primary);
   }
 
   span {
     margin-left: 16px;
-    color: var(--cps-text-secondary);
+    color: var(--cps-text-primary);
   }
 }

@@ -36,4 +36,20 @@ describe('CpsThemeService', () => {
     service.setTheme('light', false);
     expect(service.isDark()).toBe(false);
   });
+
+  it('should initialize with neutral color theme by default', () => {
+    expect(service.colorTheme()).toBe('neutral');
+  });
+
+  it('should save color theme preference to localStorage', () => {
+    service.setColorTheme('green', false);
+    expect(localStorage.getItem('cps-color-theme-preference')).toBe('green');
+  });
+
+  it('should apply color theme to document attribute', () => {
+    service.setColorTheme('amber', false);
+    expect(document.documentElement.getAttribute('data-color-theme')).toBe(
+      'amber'
+    );
+  });
 });

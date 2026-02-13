@@ -28,13 +28,13 @@ export class CpsButtonComponent implements OnChanges {
    * Color of the button.
    * @group Props
    */
-  @Input() color = 'calm';
+  @Input() color = 'accent-primary';
 
   /**
    * Color of content on the button. Works only with 'solid' type.
    * @group Props
    */
-  @Input() contentColor = 'white';
+  @Input() contentColor = 'text-on-accent';
 
   /**
    * Border radius of the button, of type number denoting pixels or string.
@@ -105,6 +105,7 @@ export class CpsButtonComponent implements OnChanges {
 
   buttonColor = '';
   textColor = '';
+  borderColor = '';
 
   @HostBinding('style.width')
   cvtWidth = '';
@@ -120,11 +121,15 @@ export class CpsButtonComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.buttonColor = getCSSColor(this.color, this.document);
+
     this.borderRadius = convertSize(this.borderRadius);
+
+    this.borderColor = this.buttonColor;
+
     this.textColor =
       this.type === 'solid'
         ? getCSSColor(this.contentColor, this.document)
-        : this.buttonColor;
+        : this.borderColor;
     this.setClasses();
   }
 

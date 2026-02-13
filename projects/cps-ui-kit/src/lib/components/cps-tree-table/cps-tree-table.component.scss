@@ -12,9 +12,7 @@ $colitem-hover-background: var(--cps-highlight-hover);
 $colitem-value-color: var(--cps-text-secondary);
 $selected-colitem-background: var(--cps-highlight-selected);
 $colitem-highlight-background: var(--cps-highlight-active);
-$colitem-highlight-selected-background: var(
-  --cps-color-highlight-selected-dark
-);
+$colitem-highlight-selected-background: var(--cps-highlight-selected);
 $paginator-text-color: var(--cps-text-secondary);
 $paginator-border-color: var(--cps-border-strong);
 $paginator-elem-hover-background: var(--cps-highlight-hover);
@@ -807,7 +805,7 @@ $tbar-normal-height: 72px;
       .p-checkbox-box {
       border-color: $color-calm;
       background: $color-calm;
-      color: #ffffff;
+      color: var(--cps-text-on-accent);
     }
     .p-checkbox:not(.p-disabled):has(.p-checkbox-input:hover) .p-checkbox-box {
       border-color: $color-calm;
@@ -820,7 +818,7 @@ $tbar-normal-height: 72px;
 
     .p-checkbox .p-checkbox-box .p-checkbox-icon {
       transition-duration: 0.2s;
-      color: #ffffff;
+      color: var(--cps-text-on-accent);
       font-size: 14px;
     }
 

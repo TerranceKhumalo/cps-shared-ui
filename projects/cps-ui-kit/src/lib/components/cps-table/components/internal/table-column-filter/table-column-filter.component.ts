@@ -449,7 +449,7 @@ export class TableColumnFilterComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('mouseenter') onMouseOver() {
-    this._updateSortIconColor('var(--cps-color-line-dark)');
+    this._updateSortIconColor('var(--cps-border-strong)');
   }
 
   @HostListener('mouseleave') onMouseLeave() {

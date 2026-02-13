@@ -54,13 +54,13 @@
       box-shadow: var(--cps-shadow-xs);
 
       &:disabled {
-        background-color: var(--cps-color-line-mid) !important;
+        background-color: var(--cps-background-disabled) !important;
         color: var(--cps-text-disabled) !important;
       }
     }
 
     &--outlined {
-      border: 2px solid currentColor;
+      border: 2px solid var(--cps-button-border-color, currentColor);
       box-sizing: border-box;
       background-color: transparent;
 
@@ -69,7 +69,7 @@
       }
 
       &:disabled {
-        border-color: var(--cps-color-line-dark) !important;
+        border-color: var(--cps-border-strong) !important;
         color: var(--cps-text-disabled) !important;
       }
     }

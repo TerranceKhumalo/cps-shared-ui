@@ -1,4 +1,4 @@
-$cps-overlay-background: rgba(0, 0, 0, 0.2);
+$cps-overlay-background: var(--cps-surface-overlay);
 $header-drag-hover-background: var(--cps-highlight-hover);
 $header-drag-active-background: var(--cps-highlight-active);
 $animation-duration: 150ms;
@@ -92,7 +92,7 @@ $animation-duration: 150ms;
   transform: scale(1);
   position: relative;
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--cps-shadow-sm);
   border: 0 none;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 1rem;

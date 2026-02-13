@@ -9,7 +9,8 @@
       backgroundColor: type === 'solid' ? buttonColor : 'transparent',
       color: textColor,
       height: cvtHeight || 'none',
-      borderRadius: borderRadius
+      borderRadius: borderRadius,
+      '--cps-button-border-color': borderColor
     }">
     <div class="cps-button__spinner">
       @if (loading) {
@@ -27,7 +28,7 @@
         <cps-icon
           class="cps-button__icon"
           [icon]="icon"
-          [color]="disabled ? 'text-light' : textColor"
+          [color]="disabled ? 'text-disabled' : textColor"
           [size]="cvtIconSize">
         </cps-icon>
       }

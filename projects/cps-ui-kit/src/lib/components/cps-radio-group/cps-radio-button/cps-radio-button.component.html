@@ -29,6 +29,7 @@
   <input
     [id]="inputId"
     type="radio"
+    [attr.aria-label]="option?.label || null"
     [disabled]="option.disabled || groupDisabled"
     [value]="option.value"
     [checked]="checked"

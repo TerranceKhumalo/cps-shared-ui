@@ -1,7 +1,7 @@
 $color-calm: var(--cps-accent-primary);
-$input-hint-color: var(--cps-text-muted); //--cps-color-text-mild
+$input-hint-color: var(--cps-text-muted);
 $input-label-disabled-color: var(--cps-text-muted);
-$input-pass-show-btn-color: var(--cps-color-text-mild);
+$input-pass-show-btn-color: var(--cps-text-muted);
 $input-placeholder-color: var(--cps-input-placeholder);
 $input-border-color: var(--cps-border-color);
 $input-label-color: var(--cps-text-primary); // --cps-color-text-dark
@@ -10,7 +10,7 @@ $input-text-disabled-color: var(--cps-text-disabled);
 $input-prefix-text-color: var(--cps-text-muted);
 $input-prefix-icon-color: var(--cps-text-primary); // --cps-color-text-dark
 
-$color-error: var(--cps-color-error);
+$color-error: var(--cps-state-error);
 $error-background: var(--cps-error-background);
 
 $hover-transition-duration: 0.2s;
@@ -131,7 +131,7 @@ $hover-transition-duration: 0.2s;
         .clear-btn {
           display: flex;
           cursor: pointer;
-          color: var(--cps-color-error);
+          color: var(--cps-state-error);
           cps-icon {
             opacity: 0;
             transition-duration: $hover-transition-duration;

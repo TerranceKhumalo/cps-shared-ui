@@ -67,7 +67,7 @@
         font-weight: 500;
         font-size: 15px;
         line-height: 20px;
-        color: var(--cps-text-muted);
+        color: var(--cps-text-secondary);
         opacity: 1;
         cursor: pointer;
         border-bottom: 3px solid transparent;
@@ -95,7 +95,7 @@
           height: 20px;
           border-radius: 50%;
           background-color: var(--cps-accent-primary);
-          color: white;
+          color: var(--cps-text-on-accent);
           font-size: 12px;
           display: flex;
           align-items: center;
@@ -130,17 +130,17 @@
         border-bottom: 3px solid var(--cps-accent-primary);
       }
       &.active.disabled {
-        border-bottom: 3px solid var(--cps-color-line-dark);
+        border-bottom: 3px solid var(--cps-border-strong);
       }
 
       &:hover:not(:active, .active, .disabled) {
-        border-bottom: 3px solid var(--cps-color-line);
+        border-bottom: 3px solid var(--cps-border-color);
         background-color: var(--cps-highlight-hover);
         color: var(--cps-text-primary);
       }
 
       &:active:not(.disabled, .active) {
-        border-bottom: 3px solid var(--cps-color-line);
+        border-bottom: 3px solid var(--cps-border-color);
       }
     }
   }

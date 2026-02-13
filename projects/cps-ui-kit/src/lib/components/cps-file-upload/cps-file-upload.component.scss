@@ -98,7 +98,7 @@ $text-color-darkest: var(--cps-text-secondary);
           margin-left: 8px;
           &:hover {
             ::ng-deep .cps-icon {
-              color: var(--cps-color-error) !important;
+              color: var(--cps-state-error) !important;
             }
           }
         }

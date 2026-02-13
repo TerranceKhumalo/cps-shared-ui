@@ -6,6 +6,7 @@ import { computed, effect, inject, Injectable, signal } from '@angular/core';
  * @group Types
  */
 export type CpsTheme = 'light' | 'dark';
+export type CpsColorTheme = 'neutral' | 'amber' | 'green' | 'luxury' | 'cps';
 
 /**
  * CpsThemeService manages application theming including dark mode support.
@@ -37,15 +38,22 @@ export type CpsTheme = 'light' | 'dark';
 export class CpsThemeService {
   private document = inject(DOCUMENT);
   private readonly THEME_STORAGE_KEY = 'cps-theme-preference';
+  private readonly COLOR_THEME_STORAGE_KEY = 'cps-color-theme-preference';
   private readonly TRANSITION_CLASS = 'cps-theme-transition';
   private readonly TRANSITION_DURATION = 500;
 
   private _theme = signal<CpsTheme>(this.getInitialTheme());
+  private _colorTheme = signal<CpsColorTheme>(this.getInitialColorTheme());
 
   /**
    * Current active theme (readonly)
    */
   readonly theme = this._theme.asReadonly();
+
+  /**
+   * Current active color theme (readonly)
+   */
+  readonly colorTheme = this._colorTheme.asReadonly();
 
   /**
    * Whether dark mode is currently active
@@ -55,7 +63,7 @@ export class CpsThemeService {
   constructor() {
     // Apply theme changes to DOM whenever theme signal changes
     effect(() => {
-      this.applyTheme(this._theme());
+      this.applyTheme(this._theme(), this._colorTheme());
     });
 
     // Listen for system theme changes
@@ -90,8 +98,29 @@ export class CpsThemeService {
     }
   }
 
-  private applyTheme(theme: CpsTheme): void {
+  /**
+   * Set specific color theme independently from mode
+   * @param colorTheme - Color theme to apply
+   * @param animated - Whether to animate the transition (default: true)
+   */
+  setColorTheme(colorTheme: CpsColorTheme, animated = true): void {
+    if (this._colorTheme() === colorTheme) return;
+
+    if (animated) {
+      this.enableTransition();
+    }
+
+    this._colorTheme.set(colorTheme);
+    this.saveColorThemePreference(colorTheme);
+
+    if (animated) {
+      setTimeout(() => this.disableTransition(), this.TRANSITION_DURATION);
+    }
+  }
+
+  private applyTheme(theme: CpsTheme, colorTheme: CpsColorTheme): void {
     this.document.documentElement.setAttribute('data-theme', theme);
+    this.document.documentElement.setAttribute('data-color-theme', colorTheme);
   }
 
   private enableTransition(): void {
@@ -115,6 +144,24 @@ export class CpsThemeService {
     return this.getSystemTheme();
   }
 
+  private getInitialColorTheme(): CpsColorTheme {
+    const stored = localStorage.getItem(
+      this.COLOR_THEME_STORAGE_KEY
+    ) as CpsColorTheme | null;
+
+    if (
+      stored === 'neutral' ||
+      stored === 'amber' ||
+      stored === 'green' ||
+      stored === 'luxury' ||
+      stored === 'cps'
+    ) {
+      return stored;
+    }
+
+    return 'neutral';
+  }
+
   private getSystemTheme(): CpsTheme {
     const prefersDark = window.matchMedia(
       '(prefers-color-scheme: dark)'
@@ -134,5 +181,9 @@ export class CpsThemeService {
 
   private saveThemePreference(theme: CpsTheme): void {
     localStorage.setItem(this.THEME_STORAGE_KEY, theme);
+  }
+
+  private saveColorThemePreference(colorTheme: CpsColorTheme): void {
+    localStorage.setItem(this.COLOR_THEME_STORAGE_KEY, colorTheme);
   }
 }
