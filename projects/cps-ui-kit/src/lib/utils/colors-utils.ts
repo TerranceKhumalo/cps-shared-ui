@@ -11,6 +11,8 @@ const isStyleRule = (rule: any): boolean => rule.type === 1;
 const SEMANTIC_COLOR_ALIASES: Record<string, string> = {
   'accent-primary': '--cps-accent-primary',
   'accent-secondary': '--cps-accent-secondary',
+  'accent-primary-contrast': '--cps-accent-primary-contrast',
+  'accent-secondary-contrast': '--cps-accent-secondary-contrast',
   'text-primary': '--cps-text-primary',
   'text-secondary': '--cps-text-secondary',
   'text-muted': '--cps-text-muted',
@@ -21,6 +23,12 @@ const SEMANTIC_COLOR_ALIASES: Record<string, string> = {
   'surface-muted': '--cps-surface-muted',
   'surface-elevated': '--cps-surface-elevated',
   'surface-control': '--cps-surface-control',
+  'surface-overlay': '--cps-surface-overlay',
+  'popover-background': '--cps-popover-background',
+  'popover-foreground': '--cps-popover-foreground',
+  'input-background': '--cps-input-background',
+  'input-foreground': '--cps-input-foreground',
+  'input-placeholder': '--cps-input-placeholder',
   'border-color': '--cps-border-color',
   'border-strong': '--cps-border-strong',
   'border-focus': '--cps-border-focus',
@@ -65,6 +73,20 @@ const LEGACY_COLOR_ALIASES: Record<string, string> = {
 };
 
 const normalizeTokenName = (value: string): string => value.trim().toLowerCase();
+
+const COLOR_TOKEN_PREFIXES = [
+  '--cps-color',
+  '--cps-text',
+  '--cps-accent',
+  '--cps-surface',
+  '--cps-border',
+  '--cps-highlight',
+  '--cps-state',
+  '--cps-background',
+  '--cps-ring',
+  '--cps-popover',
+  '--cps-input'
+];
 
 const getColorTokenVar = (value: string): string => {
   const normalized = normalizeTokenName(value);
@@ -142,7 +164,11 @@ export const getCpsColors = (_document: Document): [string, string][] =>
                 propName.trim(),
                 rule.style.getPropertyValue(propName).trim()
               ])
-              .filter(([propName]) => propName.indexOf('--cps-color') === 0);
+              .filter(([propName]) =>
+                COLOR_TOKEN_PREFIXES.some((prefix) =>
+                  propName.startsWith(prefix)
+                )
+              );
 
             return [...propValArr, ...props];
           }, [])

@@ -148,8 +148,8 @@ Tick these in order:
   - Filled icon color now uses semantic alias (`text-on-accent`).
 - [x] `src/lib/components/cps-tree-table/cps-tree-table.component.ts`
   - Runtime style border color now uses semantic border token.
-- [ ] `src/lib/components/cps-loader/cps-loader.component.ts`
-  - Uses `rgba(0, 0, 0, x)` string for overlay background.
+- [x] `src/lib/components/cps-loader/cps-loader.component.ts`
+  - Uses semantic overlay token + opacity mix.
 - [x] `styles/_cps-tooltip-style.scss`
   - Hardcoded background color replaced with semantic popover background token.
 
@@ -166,7 +166,8 @@ Tick these in order:
 #### D) Notes for cleanup execution
 
 - [ ] Keep intentional shape exceptions documented (`50%`, `0`, `unset`) and out of cleanup scope unless design changes.
-- [ ] Decide whether legacy alias support in `colors-utils.ts` remains temporary compatibility or starts deprecation in this branch.
+- [x] Decide whether legacy alias support in `colors-utils.ts` remains temporary compatibility or starts deprecation in this branch.
+  - Decision: keep legacy aliases + fallback compatibility in this branch; continue semantic-first usage in component implementation.
 
 ---
 
@@ -201,3 +202,4 @@ Mode-first is complete when all are true:
 - 2026-02-13: Second-pass tracker refactor — added explicit snapshot, execution queue, and dedicated radius-standardization track.
 - 2026-02-13: Added repo-wide grep hit list with concrete remaining files for legacy token usage, hardcoded color literals, and non-tokenized radius values.
 - 2026-02-13: Completed first implementation pass from hit list (semantic token replacements for template literals, tree-table border tokenization, tooltip semantic cleanup, and radius tokenization including new `--cps-radius-xs`).
+- 2026-02-13: Completed loader overlay semantic migration (removed hardcoded `rgba` black usage) and extended `colors-utils` semantic token support while keeping legacy compatibility.

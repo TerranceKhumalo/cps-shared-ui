@@ -53,7 +53,9 @@ describe('CpsLoaderComponent', () => {
   it('should set background color with custom opacity', () => {
     component.opacity = 0.5;
     component.ngOnInit();
-    expect(component.backgroundColor).toBe('rgba(0, 0, 0, 0.5)');
+    expect(component.backgroundColor).toBe(
+      'color-mix(in srgb, var(--cps-surface-overlay) 50%, transparent)'
+    );
   });
 
   it('should convert label color on init', () => {
@@ -70,6 +72,6 @@ describe('CpsLoaderComponent', () => {
   });
 
   it('should have correct default opacity', () => {
-    expect(component.backgroundColor).toContain('0.1');
+    expect(component.backgroundColor).toContain('10%');
   });
 });

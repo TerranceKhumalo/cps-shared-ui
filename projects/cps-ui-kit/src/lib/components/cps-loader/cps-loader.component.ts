@@ -37,13 +37,24 @@ export class CpsLoaderComponent implements OnInit {
    */
   @Input() showLabel = true;
 
-  backgroundColor = 'rgba(0, 0, 0, 0.1)';
+  backgroundColor = 'var(--cps-surface-overlay)';
 
   // eslint-disable-next-line no-useless-constructor
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {
-    this.backgroundColor = `rgba(0, 0, 0, ${this.opacity})`;
+    const opacity = this.getOverlayOpacity(this.opacity);
+    this.backgroundColor = `color-mix(in srgb, var(--cps-surface-overlay) ${opacity}%, transparent)`;
     this.labelColor = getCSSColor(this.labelColor, this.document);
+  }
+
+  private getOverlayOpacity(value: number | string): number {
+    const parsedOpacity = Number(value);
+
+    if (Number.isNaN(parsedOpacity)) {
+      return 10;
+    }
+
+    return Math.min(100, Math.max(0, parsedOpacity * 100));
   }
 }
