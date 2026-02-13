@@ -12,41 +12,137 @@ import {
   imports: [CpsIconComponent],
   template: `
     <div class="theme-controls">
-      <label class="theme-label" for="color-theme-select">Theme</label>
-      <select
-        id="color-theme-select"
-        class="theme-select"
-        [value]="colorTheme()"
-        (change)="onColorThemeChange($event)">
-        <option value="neutral">Neutral</option>
-        <option value="calm">Calm</option>
-        <option value="energy">Energy</option>
-        <option value="passion">Passion</option>
-      </select>
+      <button
+        class="theme-toggle-btn"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen"
+        aria-label="Open appearance settings"
+        type="button">
+        Customize
+        <span class="theme-toggle-caret">▾</span>
+      </button>
 
-      <label class="theme-label" for="radius-theme-select">Radius</label>
-      <select
-        id="radius-theme-select"
-        class="theme-select"
-        [value]="radiusTheme()"
-        (change)="onRadiusThemeChange($event)">
-        <option value="default">Default</option>
-        <option value="compact">Compact</option>
-        <option value="rounded">Rounded</option>
-        <option value="pill">Pill</option>
-      </select>
+      @if (menuOpen) {
+        <button
+          class="menu-backdrop"
+          type="button"
+          aria-label="Close appearance settings"
+          (click)="closeMenu()"></button>
 
-      <label class="theme-label" for="base-theme-select">Base</label>
-      <select
-        id="base-theme-select"
-        class="theme-select"
-        [value]="baseTheme()"
-        (change)="onBaseThemeChange($event)">
-        <option value="default">Default</option>
-        <option value="graphite">Graphite</option>
-        <option value="midnight">Midnight</option>
-        <option value="aubergine">Aubergine</option>
-      </select>
+        <div class="theme-menu" role="menu" aria-label="Appearance settings">
+          <div class="theme-menu-header">
+            <div class="theme-menu-title">Appearance</div>
+            <div class="theme-menu-subtitle">Theme, radius and dark base</div>
+          </div>
+
+          <section class="theme-section theme-section-theme" aria-label="Theme">
+            <h4 class="theme-section-title">Theme</h4>
+            <div class="theme-options">
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="colorTheme() === 'neutral'"
+                (click)="setColorTheme('neutral')">
+                <span class="option-dot"></span>
+                Neutral
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="colorTheme() === 'calm'"
+                (click)="setColorTheme('calm')">
+                <span class="option-dot"></span>
+                Calm
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="colorTheme() === 'energy'"
+                (click)="setColorTheme('energy')">
+                <span class="option-dot"></span>
+                Energy
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="colorTheme() === 'passion'"
+                (click)="setColorTheme('passion')">
+                <span class="option-dot"></span>
+                Passion
+              </button>
+            </div>
+          </section>
+
+          <section class="theme-section" aria-label="Radius">
+            <h4 class="theme-section-title">Radius</h4>
+            <div class="theme-options">
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="radiusTheme() === 'none'"
+                (click)="setRadiusTheme('none')">
+                None
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="radiusTheme() === 'compact'"
+                (click)="setRadiusTheme('compact')">
+                Compact
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="radiusTheme() === 'rounded'"
+                (click)="setRadiusTheme('rounded')">
+                Rounded
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="radiusTheme() === 'pill'"
+                (click)="setRadiusTheme('pill')">
+                Pill
+              </button>
+            </div>
+          </section>
+
+          <section class="theme-section" aria-label="Base">
+            <h4 class="theme-section-title">Base</h4>
+            <p class="theme-section-hint">Base affects dark mode surfaces.</p>
+            <div class="theme-options">
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="baseTheme() === 'default'"
+                (click)="setBaseTheme('default')">
+                Default
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="baseTheme() === 'graphite'"
+                (click)="setBaseTheme('graphite')">
+                Graphite
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="baseTheme() === 'midnight'"
+                (click)="setBaseTheme('midnight')">
+                Midnight
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                [class.selected]="baseTheme() === 'aubergine'"
+                (click)="setBaseTheme('aubergine')">
+                Aubergine
+              </button>
+            </div>
+          </section>
+        </div>
+      }
 
       <button
         class="theme-toggle-btn"
@@ -62,44 +158,28 @@ import {
   styles: [
     `
       .theme-controls {
+        --appearance-radius-sm: 8px;
+        --appearance-radius-md: 14px;
         display: flex;
         align-items: center;
         gap: 8px;
-      }
-
-      .theme-label {
-        color: var(--cps-text-secondary);
-        font-size: 14px;
-        font-family: 'Source Sans Pro', sans-serif;
-      }
-
-      .theme-select {
-        padding: 8px 10px;
-        background: var(--cps-input-background);
-        color: var(--cps-input-foreground);
-        border: 1px solid var(--cps-border-color);
-        border-radius: var(--cps-border-radius-small);
-        font-family: 'Source Sans Pro', sans-serif;
-        font-size: 14px;
-
-        &:focus-visible {
-          outline: 2px solid var(--cps-ring-color);
-          outline-offset: 2px;
-        }
+        position: relative;
       }
 
       .theme-toggle-btn {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 8px 10px;
-        background: transparent;
+        height: 32px;
+        padding: 0 11px;
+        background: var(--cps-surface-elevated);
         border: 1px solid var(--cps-border-color);
-        border-radius: var(--cps-border-radius-small);
-        color: var(--cps-text-secondary);
+        border-radius: var(--appearance-radius-sm);
+        color: var(--cps-text-primary);
         cursor: pointer;
         font-family: 'Source Sans Pro', sans-serif;
-        font-size: 14px;
+        font-size: 12px;
+        font-weight: 600;
         transition: all 0.2s;
 
         &:hover {
@@ -116,6 +196,183 @@ import {
           outline-offset: 2px;
         }
       }
+
+      .theme-toggle-caret {
+        color: var(--cps-text-muted);
+        font-size: 11px;
+        line-height: 1;
+      }
+
+      .menu-backdrop {
+        position: fixed;
+        inset: 0;
+        margin: 0;
+        padding: 0;
+        background: var(--cps-surface-overlay);
+        opacity: 0.22;
+        border: 0;
+        border-radius: 0;
+        appearance: none;
+        -webkit-appearance: none;
+        z-index: 10;
+      }
+
+      .theme-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        width: min(320px, calc(100vw - 16px));
+        max-height: min(70vh, 520px);
+        overflow: auto;
+        background: var(--cps-surface-control);
+        border: 1px solid var(--cps-border-color);
+        border-radius: var(--appearance-radius-md);
+        box-shadow: var(--cps-shadow-md);
+        z-index: 20;
+        padding: 6px;
+        transform-origin: top right;
+        animation: menu-enter var(--cps-motion-fast) var(--cps-motion-easing);
+      }
+
+      @keyframes menu-enter {
+        from {
+          opacity: 0;
+          transform: translateY(-4px) scale(0.985);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .theme-menu {
+          animation: none;
+        }
+      }
+
+      .theme-menu-header {
+        padding: 10px 10px 9px;
+        border-bottom: 1px solid var(--cps-border-color);
+      }
+
+      .theme-menu-title {
+        color: var(--cps-text-primary);
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .theme-menu-subtitle {
+        margin-top: 3px;
+        color: var(--cps-text-muted);
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 11px;
+        line-height: 1.35;
+      }
+
+      .theme-section {
+        padding: 10px;
+      }
+
+      .theme-section + .theme-section {
+        border-top: 1px solid var(--cps-border-color);
+      }
+
+      .theme-section-title {
+        margin: 0 0 6px;
+        color: var(--cps-text-muted);
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .theme-section-hint {
+        margin: -1px 0 8px;
+        color: var(--cps-text-muted);
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 11px;
+        line-height: 1.35;
+      }
+
+      .theme-options {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .theme-option {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        min-height: 32px;
+        padding: 7px 8px;
+        border: 1px solid transparent;
+        border-radius: var(--appearance-radius-sm);
+        background: transparent;
+        color: var(--cps-text-primary);
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 12px;
+        line-height: 1;
+        text-align: left;
+        cursor: pointer;
+
+        &:hover {
+          background: var(--cps-highlight-hover);
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--cps-ring-color);
+          outline-offset: 2px;
+        }
+      }
+
+      .theme-option.selected {
+        background: var(--cps-highlight-active);
+        border-color: var(--cps-border-focus);
+      }
+
+      .theme-option.selected::after {
+        content: '✓';
+        margin-left: auto;
+        color: var(--cps-accent-primary);
+        font-weight: 700;
+        font-size: 12px;
+      }
+
+      .option-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 9999px;
+        background: transparent;
+        border: 1px solid var(--cps-border-color);
+        flex: 0 0 auto;
+      }
+
+      .theme-section-theme .theme-option:nth-child(1) .option-dot {
+        background: var(--cps-text-muted);
+      }
+
+      .theme-section-theme .theme-option:nth-child(2) .option-dot {
+        background: var(--cps-color-calm);
+      }
+
+      .theme-section-theme .theme-option:nth-child(3) .option-dot {
+        background: var(--cps-color-energy);
+      }
+
+      .theme-section-theme .theme-option:nth-child(4) .option-dot {
+        background: var(--cps-color-passion);
+      }
+
+      .theme-option.selected .option-dot {
+        border-color: transparent;
+      }
     `
   ]
 })
@@ -126,35 +383,29 @@ export class ThemeToggleComponent {
   colorTheme = this.themeService.colorTheme;
   radiusTheme = this.themeService.radiusTheme;
   baseTheme = this.themeService.baseTheme;
+  menuOpen = false;
 
   toggleTheme(): void {
     this.themeService.toggleTheme();
   }
 
-  onColorThemeChange(event: Event): void {
-    const target = event.target as HTMLSelectElement | null;
-    const value = target?.value as CpsColorTheme | undefined;
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
 
-    if (!value) return;
+  closeMenu(): void {
+    this.menuOpen = false;
+  }
 
+  setColorTheme(value: CpsColorTheme): void {
     this.themeService.setColorTheme(value);
   }
 
-  onRadiusThemeChange(event: Event): void {
-    const target = event.target as HTMLSelectElement | null;
-    const value = target?.value as CpsRadiusTheme | undefined;
-
-    if (!value) return;
-
+  setRadiusTheme(value: CpsRadiusTheme): void {
     this.themeService.setRadiusTheme(value);
   }
 
-  onBaseThemeChange(event: Event): void {
-    const target = event.target as HTMLSelectElement | null;
-    const value = target?.value as CpsBaseTheme | undefined;
-
-    if (!value) return;
-
+  setBaseTheme(value: CpsBaseTheme): void {
     this.themeService.setBaseTheme(value);
   }
 }

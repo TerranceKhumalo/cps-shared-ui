@@ -70,6 +70,10 @@ describe('CpsThemeService', () => {
     expect(localStorage.getItem('cps-radius-theme-preference')).toBe('rounded');
   });
 
+  it('should initialize with none radius theme by default', () => {
+    expect(service.radiusTheme()).toBe('none');
+  });
+
   it('should apply radius theme to document attribute', () => {
     service.setRadiusTheme('pill', false);
     expect(document.documentElement.getAttribute('data-radius-theme')).toBe(

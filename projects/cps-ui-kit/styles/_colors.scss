@@ -405,6 +405,14 @@
   --cps-highlight-selected: rgba(220, 0, 50, 0.16);
 }
 
+:root[data-radius-theme='none'] {
+  --cps-radius-xs: 0px;
+  --cps-radius-sm: 0px;
+  --cps-radius-md: 0px;
+  --cps-radius-lg: 0px;
+  --cps-radius-xl: 0px;
+}
+
 :root[data-radius-theme='compact'] {
   --cps-radius-sm: 3px;
   --cps-radius-md: 6px;

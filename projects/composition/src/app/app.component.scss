@@ -4,11 +4,10 @@
   height: vars.$top-tbar-height;
   background-color: var(--cps-surface-body);
   display: flex;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 14px;
   align-items: center;
   border-bottom: 1px solid var(--cps-border-color);
-  gap: 16px;
+  gap: 8px;
 
   img {
     width: 42px;
@@ -16,11 +15,21 @@
   }
 
   span {
-    font-size: 18px;
-    color: vars.$color-calm;
+    font-size: 13px;
+    color: var(--cps-text-secondary);
+    line-height: 1;
 
     &:first-of-type {
       flex: 1;
+      color: var(--cps-text-primary);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    b {
+      color: var(--cps-accent-primary);
+      font-weight: 700;
+      font-size: 15px;
     }
   }
 
@@ -41,14 +50,16 @@
     background-color: vars.$composition-background;
     .composition-body-toolbar {
       height: vars.$inner-tbar-height;
-      background: vars.$color-calm;
+      background: var(--cps-surface-elevated);
+      border-bottom: 1px solid var(--cps-border-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: white;
-      font-size: 20px;
+      color: var(--cps-text-primary);
+      font-size: 16px;
       .composition-body-toolbar-title {
         margin: 0 auto;
+        font-weight: 600;
       }
       .sidebar-toggle-icon {
         margin-left: 12px;

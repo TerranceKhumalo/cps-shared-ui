@@ -8,7 +8,7 @@ import { computed, effect, inject, Injectable, signal } from '@angular/core';
 export type CpsTheme = 'light' | 'dark';
 export type CpsColorTheme = 'neutral' | 'calm' | 'energy' | 'passion';
 export type CpsBaseTheme = 'default' | 'graphite' | 'midnight' | 'aubergine';
-export type CpsRadiusTheme = 'default' | 'compact' | 'rounded' | 'pill';
+export type CpsRadiusTheme = 'none' | 'compact' | 'rounded' | 'pill';
 
 /**
  * CpsThemeService manages application theming including dark mode support.
@@ -248,7 +248,7 @@ export class CpsThemeService {
     ) as CpsRadiusTheme | null;
 
     if (
-      stored === 'default' ||
+      stored === 'none' ||
       stored === 'compact' ||
       stored === 'rounded' ||
       stored === 'pill'
@@ -256,7 +256,7 @@ export class CpsThemeService {
       return stored;
     }
 
-    return 'default';
+    return 'none';
   }
 
   private getSystemTheme(): CpsTheme {
