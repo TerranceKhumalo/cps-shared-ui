@@ -277,7 +277,7 @@
   --cps-accent-primary-contrast: #ffffff;
   --cps-accent-secondary: var(--cps-color-energy);
   --cps-accent-secondary-contrast: #2d2323;
-  --cps-color-error: #cc3333;
+  --cps-color-error: #b91c1c;
   --cps-error-background: #fef3f2;
 
   // Lines and borders
@@ -326,7 +326,7 @@
   --cps-state-warn-surface: var(--cps-color-warn-bg);
   --cps-state-error: var(--cps-color-error);
   --cps-state-error-contrast: #ffffff;
-  --cps-state-error-surface: var(--cps-color-error-bg);
+  --cps-state-error-surface: rgba(185, 28, 28, 0.14);
 
   // Modern semantic surfaces
   --cps-card-background: var(--cps-surface-highlight);

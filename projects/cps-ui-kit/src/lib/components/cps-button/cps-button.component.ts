@@ -187,6 +187,10 @@ export class CpsButtonComponent implements OnChanges {
       }
     }
 
+    if (this.isDestructiveColor(this.color)) {
+      this.classesList.push('cps-button--destructive');
+    }
+
     if (this.icon && this.label) {
       switch (this.iconPosition) {
         case 'before': {
@@ -199,6 +203,20 @@ export class CpsButtonComponent implements OnChanges {
         }
       }
     }
+  }
+
+  private isDestructiveColor(color: string): boolean {
+    const normalized = color.trim().toLowerCase();
+
+    return (
+      normalized === 'destructive' ||
+      normalized === 'state-error' ||
+      normalized === 'error' ||
+      normalized === '--cps-state-error' ||
+      normalized === 'cps-state-error' ||
+      normalized.includes('--cps-state-error') ||
+      normalized.includes('--cps-color-error')
+    );
   }
 
   onClick(event: Event) {

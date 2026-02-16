@@ -39,6 +39,7 @@ const SEMANTIC_COLOR_ALIASES: Record<string, string> = {
   'state-success': '--cps-state-success',
   'state-warn': '--cps-state-warn',
   'state-error': '--cps-state-error',
+  destructive: '--cps-state-error',
   'ring-color': '--cps-ring-color',
   'background-color': '--cps-background-color',
   'background-disabled': '--cps-background-disabled',

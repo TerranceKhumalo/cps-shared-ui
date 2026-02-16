@@ -29,6 +29,10 @@
       outline-offset: 2px;
     }
 
+    &.cps-button--destructive:focus-visible {
+      outline-color: var(--cps-state-error);
+    }
+
     &:hover:not(:active):not(:disabled) {
       box-shadow: var(--cps-shadow-sm);
     }
@@ -74,6 +78,21 @@
       }
     }
 
+    &.cps-button--destructive.cps-button--outlined {
+      &:hover:not(:active):not(:disabled) {
+        background-color: var(--cps-state-error-surface);
+        border-color: var(--cps-state-error);
+      }
+
+      &:active:not(:disabled) {
+        background-color: color-mix(
+          in srgb,
+          var(--cps-state-error-surface) 70%,
+          var(--cps-state-error) 30%
+        );
+      }
+    }
+
     &--borderless {
       background-color: transparent;
 
@@ -83,6 +102,20 @@
       &:hover:not(:active):not(:disabled) {
         background-color: var(--cps-highlight-hover);
         box-shadow: none;
+      }
+    }
+
+    &.cps-button--destructive.cps-button--borderless {
+      &:hover:not(:active):not(:disabled) {
+        background-color: var(--cps-state-error-surface);
+      }
+
+      &:active:not(:disabled) {
+        background-color: color-mix(
+          in srgb,
+          var(--cps-state-error-surface) 72%,
+          var(--cps-state-error) 28%
+        );
       }
     }
 
